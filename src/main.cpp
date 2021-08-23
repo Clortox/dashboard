@@ -1,0 +1,15 @@
+///////////////////////////////////////////////////////////////////////////////
+// Tyler Perkins
+// 8-23-21
+// Entry point
+//
+
+#include "config.hpp"
+
+
+
+int main(int argc, char** argv){
+
+
+    return 0;
+}
