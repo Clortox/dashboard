@@ -5,10 +5,11 @@
 //
 
 #include "config.hpp"
-
+#include "handler/handler.hpp"
 
 
 int main(int argc, char** argv){
+    dashboard::handlers::setHandlers();
 
 
     return 0;
