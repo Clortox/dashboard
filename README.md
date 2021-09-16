@@ -13,6 +13,7 @@ Features/TODO
 - Display who is home
 - Display network speed
 - Display plex currently playing
+- Play audio files (background music/tracks)?
 
 Depends on
 ==========
