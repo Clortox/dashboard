@@ -233,7 +233,7 @@ SDL_Renderer* board::getRenderer(){
 // Constructors ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
-board::board(const bool init = true){
+board::board(const bool init){
     _window = nullptr;
     _renderer = nullptr;
 
@@ -316,8 +316,9 @@ int board::init(){
 // This is where most of the logic lives
 void board::start(){
 
+    for(;;){
 
-
+    }
 
 }
 

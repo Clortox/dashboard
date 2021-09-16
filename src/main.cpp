@@ -13,6 +13,8 @@ int main(int argc, char** argv){
 
     dashboard::board _board;
 
+    _board.start();
+
 
     return 0;
 }
