@@ -12,7 +12,7 @@
 //SCREEN_{WIDTH, HEIGHT}
 // Width and height of the screen/window
 constexpr int SCREEN_WIDTH  = 1920;
-constexpr int SCREEN_HEIHGT = 1080;
+constexpr int SCREEN_HEIGHT = 1080;
 
 // MAX_FRAMERATE
 // The aprox framerate at runtime
@@ -76,18 +76,20 @@ constexpr int IMG_FLAGS = 0
 // Keep this as DATA to use the install dir set in the makefile
 constexpr char DATA_DIR[]  = DATA;
 
-// IMAGE_DIR
-// Where all images will be
-// Keep this as DATA_IMG to use img dir set in the makefile
-constexpr char IMAGE_DIR[] = DATA_IMG;
-
-// FONT_DIR
-// Where all fonts will be
-// Keep this as DATA_FONT to use font dir set in the makefile
-constexpr char FONT_DIR[]  = DATA_FONT;
-
 // IMAGE_LOCATIONS
 // Locations of all static images used
 static const char* IMAGE_LOCATIONS[] = {
+    "img/bmp_24.png",
+};
 
+// FONT_LOCATIONS
+// Locations of all fonts used
+static const char* FONT_LOCATIONS[] = {
+    "font/ielianto-normal.ttf",
+};
+
+// CONST_STRINGS
+// All constant strings
+static const char* CONST_STRINGS[] = {
+    
 };
