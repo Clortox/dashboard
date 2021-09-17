@@ -18,10 +18,10 @@
 #include <SDL2/SDL_ttf.h>
 
 namespace dashboard {
-    class pannel {
+    class panel {
     public:
-        pannel() = default;
-        ~pannel() = default;
+        panel() = default;
+        ~panel() = default;
 
         virtual void draw() = 0;
     
