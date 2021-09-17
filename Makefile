@@ -10,7 +10,7 @@ FLAGS  = -pipe
 
 CFLAGS  = -Wall
 CFLAGS += -Ofast
-CFLAGS += -std=c++20
+CFLAGS += -std=c++17
 #CFLAGS += -g
 #CFLAGS += -pg
 

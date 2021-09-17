@@ -47,6 +47,13 @@ compile the test.cpp file provided in ./tests . There should be output on the
 screen as flashing. Feel free to change the desired graphics driver in the
 raspberry pi config
 
+Developing your own pannels
+===========================
+
+Refer to the
+[development]
+(DEVELOPMENT.md)
+documentation
 Usage
 =====
 
