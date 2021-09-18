@@ -8,13 +8,19 @@
 #include "handler/handler.hpp"
 #include "board.hpp"
 
+#include <iostream>
+
 int main(int argc, char** argv){
     dashboard::handlers::setHandlers();
 
-    dashboard::board _board;
+    dashboard::board _board(false);
+
+    if(_board.init() != 0){
+        std::cerr << "Due to errors, " << argv[0] 
+            << " was unable to start, quitting!" << std::endl;
+    }
 
     _board.start();
-
 
     return 0;
 }

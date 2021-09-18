@@ -255,6 +255,10 @@ board::~board(){
     SDL_Quit();
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Board init functions ///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
 int board::init(){
     SDL_Log("Init SDL...\n");
 
@@ -315,10 +319,65 @@ int board::init(){
 // This is called to start the main loop.
 // This is where most of the logic lives
 void board::start(){
+    initConstResources();
 
+    SDL_Log("Starting main loop...\n");
     for(;;){
 
     }
+
+}
+
+///////////////////////////////////////
+// Grab all constant resources from 
+// the configuration file, as well as
+// all panel's configurations
+void board::initConstResources(){
+    //load all resrouces declared in config.hpp
+    std::string fullPath = DATA_DIR;
+
+    SDL_Log("Base path: %s", fullPath.c_str());
+
+    //load images into memory
+    fullPath = DATA_IMG;
+    fullPath += "/";
+    SDL_Log("Static images directory prefix: %s\n", fullPath.c_str());
+    SDL_Log("Loading static images into working memory...\n");
+    for(unsigned int i = 0; 
+            i < (sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0])); ++i){
+
+        SDL_Log("Loaded image %s at memory location %p\n",
+                IMAGE_LOCATIONS[i],
+                setImage(fullPath + IMAGE_LOCATIONS[0]));
+    }
+    SDL_Log("Loaded static images into working memory\n");
+
+    //load fonts into memory
+    fullPath = DATA_FONT;
+    fullPath += "/";
+    SDL_Log("Loading fonts into working memory...\n");
+    for(unsigned int i = 0;
+            i < (sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0])); ++i){
+
+        SDL_Log("Loaded font %s %lu at memory location %p\n",
+                FONT_LOCATIONS[i]._name,
+                FONT_LOCATIONS[i]._size,
+                setFont({FONT_LOCATIONS[i]._name, FONT_LOCATIONS[i]._size}));
+    }
+    SDL_Log("Loaded fonts into working memory\n");
+
+    SDL_Log("Loading static strings into working memory...\n");
+    for(unsigned int i = 0;
+            i < (sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0])); ++i){
+        SDL_Log("Loaded string (\"%s\") with font %s %lu at memory location %p\n",
+                CONST_STRINGS[i]._text,
+                CONST_STRINGS[i]._font_size._name,
+                CONST_STRINGS[i]._font_size._size,
+                setString(CONST_STRINGS[i]._text,
+                    { CONST_STRINGS[i]._font_size._name,
+                      CONST_STRINGS[i]._font_size._size }));
+    }
+    SDL_Log("Loaded static strings into working memory\n");
 
 }
 
@@ -350,7 +409,7 @@ TTF_Font* board::getFont(const font_and_size& fs){
     if(_fonts.find(fs) != _fonts.end())
         return _fonts.find(fs)->second.font();
 
-    //Dynamic Fonts? Is the needed?
+    //TODO: Dynamic Fonts? Is the needed?
     //not found, return null
     return nullptr;
 }

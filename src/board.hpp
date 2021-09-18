@@ -127,6 +127,7 @@ namespace dashboard {
             SDL_Texture_Wrapper, string_and_font_hash> _dynamic_strings;
 
         //TODO: Dynamic images?
+        //TODO: Dynamic Fonts?
 
         //local pointers to the globals
         SDL_Window* _window;

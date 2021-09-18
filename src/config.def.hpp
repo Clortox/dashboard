@@ -74,7 +74,15 @@ constexpr int IMG_FLAGS = 0
 // DATA_DIR
 // Where all resources will be
 // Keep this as DATA to use the install dir set in the makefile
-constexpr char DATA_DIR[]  = DATA;
+constexpr char DATA_DIR[]  = DATA_ ;
+
+// IMG_DIR
+// Where all images are
+// Keep this a DATA_IMG_ to use the DATA_IMG dir defined in the makefile
+constexpr char DATA_IMG[] = DATA_IMG_;
+
+//TODO: Add directory prefix for each of these, and change it so it doesnt use
+//that whole path as the key for the file
 
 // IMAGE_LOCATIONS
 // Locations of all static images used
@@ -82,14 +90,27 @@ static const char* IMAGE_LOCATIONS[] = {
     "img/bmp_24.png",
 };
 
+// FONT_DIR
+// Where all fonts are kept
+// Keep this as FONT_DIR_ to use the DATA_FONT dir defined in the makefile
+constexpr char DATA_FONT[] = DATA_FONT_;
+
 // FONT_LOCATIONS
 // Locations of all fonts used
-static const char* FONT_LOCATIONS[] = {
-    "font/ielianto-normal.ttf",
+struct FONT_SIZE {
+    const char* _name;
+    const size_t _size;
+};
+static const FONT_SIZE FONT_LOCATIONS[] = {
+    { "elianto-normal.ttf", 24 },
 };
 
 // CONST_STRINGS
 // All constant strings
-static const char* CONST_STRINGS[] = {
-    
+struct FONT_SIZE_STRING {
+    const char* _text;
+    const FONT_SIZE _font_size;
+};
+static const FONT_SIZE_STRING CONST_STRINGS[] = {
+    { "Test string 12345", FONT_LOCATIONS[1] },
 };

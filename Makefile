@@ -11,7 +11,7 @@ FLAGS  = -pipe
 CFLAGS  = -Wall
 CFLAGS += -Ofast
 CFLAGS += -std=c++17
-#CFLAGS += -g
+CFLAGS += -g
 #CFLAGS += -pg
 
 #required for rss-cli
@@ -34,9 +34,9 @@ TARGET = dashboard.out
 
 MAKEFLAGS += --jobs=4
 
-DEFINITIONS  = -DDATA='"$(DATA)"'
-DEFINITIONS += -DDATA_IMG='"$(DATA_IMG)"'
-DEFINITIONS += -DDATA_FONT='"$(DATA_FONT)"'
+DEFINITIONS  = -DDATA_='"$(DATA)"'
+DEFINITIONS += -DDATA_IMG_='"$(DATA_IMG)"'
+DEFINITIONS += -DDATA_FONT_='"$(DATA_FONT)"'
 
 all : $(OBJ)
 	@echo LD $@
