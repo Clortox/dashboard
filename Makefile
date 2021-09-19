@@ -26,7 +26,8 @@ BIN = ./bin
 
 PREFIX    = /usr/local
 MANPREFIX = $(PREFIX)/share/man
-DATA      = /usr/share/dashboard
+#DATA      = /usr/share/dashboard
+DATA      = $(shell pwd)
 DATA_IMG  = $(DATA)/img
 DATA_FONT = $(DATA)/font
 
