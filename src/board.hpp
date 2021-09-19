@@ -147,7 +147,67 @@ namespace dashboard {
         
 
         //local pointers to the globals
-        SDL_Window* _window;
-        SDL_Renderer* _renderer;
+        inline static SDL_Window* _window;
+        inline static SDL_Renderer* _renderer;
     };
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Static functions ///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+
+SDL_Window* dashboard::board::getWindow(){
+    if(_window == nullptr){
+        _window = SDL_CreateWindow(WINDOW_TITLE,
+                SDL_WINDOWPOS_UNDEFINED,
+                SDL_WINDOWPOS_UNDEFINED,
+                SCREEN_WIDTH, SCREEN_HEIGHT,
+                SDL_WINDOW_FLAGS);
+
+        if(_window == NULL)
+            SDL_Log("Window could not be created, %s\n", SDL_GetError());
+    }
+    return _window;
+}
+
+SDL_Renderer* dashboard::board::getRenderer(){
+    if(_renderer == nullptr){
+        _renderer = SDL_CreateRenderer(board::getWindow(), -1,
+                SDL_RENDERER_ACCELERATED);
+
+        if(_renderer == NULL)
+            SDL_Log("Renderer could not be created, %s\n", SDL_GetError());
+    }
+
+    return _renderer;
+}
+
+SDL_Texture* dashboard::board::getString(const std::string& text, const font_and_size& fs){
+    //check for string in static strings, then check in dynamic strings
+
+    string_and_font sf = {text, fs};
+    if(_strings.find(sf) != _strings.end())
+        return _strings.find(sf)->second.texture();
+    
+    //is dynamic string, generate:
+    return _dynamic_strings.get(sf).texture();
+}
+
+SDL_Texture* dashboard::board::getImage(const std::string& path){
+    if(_textures.find(path) != _textures.end())
+        return _textures.find(path)->second.texture();
+
+    //TODO: Dynamic Images?
+    //not found, return null
+    return nullptr;
+}
+
+TTF_Font* dashboard::board::getFont(const font_and_size& fs){
+    if(_fonts.find(fs) != _fonts.end()){
+        return _fonts.find(fs)->second.font();
+    }
+
+    //TODO: Dynamic Fonts? Is the needed?
+    //not found, return null
+    return nullptr;
 }

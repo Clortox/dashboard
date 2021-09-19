@@ -246,40 +246,6 @@ TTF_Font* SDL_Font_Wrapper::font() {
 }
 
 ///////////////////////////////////////////////////////////////////////////////
-// Static functions ///////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-
-SDL_Window* board::getWindow(){
-    static SDL_Window* _window = nullptr;
-
-    if(_window == nullptr){
-        _window = SDL_CreateWindow(WINDOW_TITLE,
-                SDL_WINDOWPOS_UNDEFINED,
-                SDL_WINDOWPOS_UNDEFINED,
-                SCREEN_WIDTH, SCREEN_HEIGHT,
-                SDL_WINDOW_FLAGS);
-
-        if(_window == NULL)
-            SDL_Log("Window could not be created, %s\n", SDL_GetError());
-    }
-    return _window;
-}
-
-SDL_Renderer* board::getRenderer(){
-    static SDL_Renderer* _renderer = nullptr;
-
-    if(_renderer == nullptr){
-        _renderer = SDL_CreateRenderer(board::getWindow(), -1,
-                SDL_RENDERER_ACCELERATED);
-
-        if(_renderer == NULL)
-            SDL_Log("Renderer could not be created, %s\n", SDL_GetError());
-    }
-
-    return _renderer;
-}
-
-///////////////////////////////////////////////////////////////////////////////
 // Constructors ///////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -418,7 +384,8 @@ void board::start(){
         //call draw on the current panel
         PANELS[i]->draw();
 
-        std::cerr << "Current frame: " << fcount << "\n";
+        if(fcount % 10 == 0)
+            std::cerr << "Frame : " << fcount << "\n";
 
         SDL_RenderPresent(_renderer);
 
@@ -502,36 +469,6 @@ void board::initConstResources(){
 ///////////////////////////////////////////////////////////////////////////////
 // Memory Functions ///////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
-
-SDL_Texture* board::getString(const std::string& text, const font_and_size& fs){
-    //check for string in static strings, then check in dynamic strings
-
-    string_and_font sf = {text, fs};
-    if(_strings.find(sf) != _strings.end())
-        return _strings.find(sf)->second.texture();
-    
-    //is dynamic string, generate:
-    return _dynamic_strings.get(sf).texture();
-}
-
-SDL_Texture* board::getImage(const std::string& path){
-    if(_textures.find(path) != _textures.end())
-        return _textures.find(path)->second.texture();
-
-    //TODO: Dynamic Images?
-    //not found, return null
-    return nullptr;
-}
-
-TTF_Font* board::getFont(const font_and_size& fs){
-    if(_fonts.find(fs) != _fonts.end()){
-        return _fonts.find(fs)->second.font();
-    }
-
-    //TODO: Dynamic Fonts? Is the needed?
-    //not found, return null
-    return nullptr;
-}
 
 SDL_Texture* board::setString(const std::string& text, const font_and_size& fs){
     string_and_font sf = {text, fs};
