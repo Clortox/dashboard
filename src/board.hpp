@@ -12,6 +12,7 @@
 
 #include <functional>
 #include <unordered_map>
+#include <string.h>
 
 #include <SDL.h>
 #include <SDL2/SDL_image.h>
@@ -56,16 +57,22 @@ namespace dashboard {
     public:
         SDL_Texture_Wrapper();
         ~SDL_Texture_Wrapper();
+        SDL_Texture_Wrapper(const SDL_Texture_Wrapper&);
 
+        //String loading
         SDL_Texture_Wrapper(const std::string&, const font_and_size&);
         SDL_Texture_Wrapper(const string_and_font&);
 
+        //Image loading
         SDL_Texture_Wrapper(const texture_path&);
 
-        SDL_Texture* texture() const;
+        bool load();
+        SDL_Texture* texture();
 
     private:
         SDL_Texture* _texture;
+        font_and_size _fs;
+        std::string _text;
     };
 
     typedef std::string font_path;
@@ -73,14 +80,17 @@ namespace dashboard {
     public:
         SDL_Font_Wrapper();
         ~SDL_Font_Wrapper();
+        SDL_Font_Wrapper(const SDL_Font_Wrapper&);
 
         SDL_Font_Wrapper(const font_path&, const size_t);
         SDL_Font_Wrapper(const font_and_size&);
 
-        TTF_Font* font() const;
+        bool load();
+        TTF_Font* font();
 
     private:
         TTF_Font* _font;
+        font_and_size _fs;
     };
 
 
@@ -115,6 +125,11 @@ namespace dashboard {
         SDL_Texture* setString(const std::string&, const font_and_size&);
         SDL_Texture* setImage (const std::string&);
         TTF_Font*    setFont  (const font_and_size&);
+
+        //TODO make set* functions that accept SDL_*_Wrapper objects
+        SDL_Texture* setString(const string_and_font&, const SDL_Texture_Wrapper&);
+        SDL_Texture* setImage (const std::string&, const SDL_Texture_Wrapper&);
+        TTF_Font*    setFont  (const font_and_size&, const SDL_Font_Wrapper&);
 
         //containers for resources
         inline static std::unordered_map<std::string, SDL_Texture_Wrapper> _textures;

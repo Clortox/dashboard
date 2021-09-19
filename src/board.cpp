@@ -88,6 +88,8 @@ bool string_and_font::operator<=(const string_and_font& rhs) const{
 
 SDL_Texture_Wrapper::SDL_Texture_Wrapper(){
     _texture = nullptr;
+    _fs = { "", 0 };
+    _text = "";
 }
 
 SDL_Texture_Wrapper::~SDL_Texture_Wrapper(){
@@ -95,66 +97,103 @@ SDL_Texture_Wrapper::~SDL_Texture_Wrapper(){
         SDL_DestroyTexture(_texture);
 }
 
-SDL_Texture_Wrapper::SDL_Texture_Wrapper(const std::string& text, const font_and_size& fs){
-    SDL_Surface* tmpSurface;
+SDL_Texture_Wrapper::SDL_Texture_Wrapper(const SDL_Texture_Wrapper& rhs){
+    _texture = nullptr;
+    _fs = rhs._fs;
+    _text = rhs._text;
+}
 
-    TTF_Font* fs_font = board::getFont(fs);
-
-    tmpSurface = TTF_RenderText_Solid(fs_font, text.c_str(), 
-            { BOARD_RED, BOARD_GREEN, BOARD_BLUE });
-
-    if(tmpSurface == NULL){
-        SDL_Log("SDL_Texture_Wrapper: Failed to create surface from string (%s): %s\n",
-                text.c_str(), SDL_GetError());
-        _texture = NULL;
-        return;
-    }
-
-    _texture = SDL_CreateTextureFromSurface(board::getRenderer(), tmpSurface);
-
-    if(_texture == NULL){
-        SDL_Log("SDL_Texture_Wrapper: failed to create texture from surface of string (%s): %s\n",
-                text.c_str(), SDL_GetError());
-        SDL_FreeSurface(tmpSurface);
-        return;
-    }
-
-    //texture was created sucessfully, cleanup surface
-
-    SDL_FreeSurface(tmpSurface);
-    SDL_UnlockTexture(_texture);
+SDL_Texture_Wrapper::SDL_Texture_Wrapper(const std::string& text, 
+        const font_and_size& fs) : _fs(fs), _text(text){
+    _texture = nullptr;
 }
 
 SDL_Texture_Wrapper::SDL_Texture_Wrapper(const string_and_font& sf) 
     : SDL_Texture_Wrapper(sf._string, sf._fs) {};
 
-SDL_Texture_Wrapper::SDL_Texture_Wrapper(const texture_path& path){
-    SDL_Surface* tmpSurface;
-
-    tmpSurface = IMG_Load(path.c_str());
-
-    if(tmpSurface == NULL){
-        SDL_Log("SDL_Texture_Wrapper: failed to load image (%s): %s\n",
-                path.c_str(), SDL_GetError());
-        return;
-    }
-
-    _texture = SDL_CreateTextureFromSurface(board::getRenderer(), tmpSurface);
-
-    if(_texture == NULL){
-        SDL_Log("SDL_Texture_Wrapper: failed to create texture from surface of image (%s): %s\n",
-                path.c_str(), SDL_GetError());
-        SDL_FreeSurface(tmpSurface);
-        return;
-    }
-
-    //texture was created sucessfully, cleanup surface
-        
-    SDL_FreeSurface(tmpSurface);
-    SDL_UnlockTexture(_texture);
+SDL_Texture_Wrapper::SDL_Texture_Wrapper(const texture_path& path)
+    : _text(path) {
+    _texture = nullptr;
 }
 
-SDL_Texture* SDL_Texture_Wrapper::texture() const {
+bool SDL_Texture_Wrapper::load(){
+    //if the texture is already loaded, we dont need to do anything
+    if(_texture != nullptr)
+        return true;
+
+    SDL_Surface* tmpSurface = NULL;
+
+    if((_fs._font == "" || _fs._ptsize == 0) && !_text.empty()){ //load a texture
+        tmpSurface = IMG_Load(_text.c_str());
+
+        if(tmpSurface == NULL){
+            SDL_Log("SDL_Texture_Wrapper::load() : failed to load image (%s): %s\n",
+                    _text.c_str(), SDL_GetError());
+            return false;
+        }
+
+        _texture = SDL_CreateTextureFromSurface(board::getRenderer(), tmpSurface);
+
+        if(_texture == NULL){
+            SDL_Log("SDL_Texture_Wrapper: failed to create texture from surface \
+                    of image (%s): %s\n",
+                    _text.c_str(), SDL_GetError());
+            SDL_FreeSurface(tmpSurface);
+            return false;
+        }
+
+        //texture was created sucessfully, cleanup surface
+            
+        SDL_FreeSurface(tmpSurface);
+        SDL_UnlockTexture(_texture);
+        return true;
+
+    } else if (_fs._font != "" && _fs._ptsize != 0){ //if _fs is in a valid state
+        //load a string
+        TTF_Font* fs_font = board::getFont(_fs);
+
+        if(fs_font == nullptr){
+            SDL_Log("SDL_Texture_Wrapper::load() : Failed to find given font (%s %lu)\n",
+                    _fs._font.c_str(), _fs._ptsize);
+            return false;
+        }
+
+        tmpSurface = TTF_RenderText_Solid(fs_font, _text.c_str(), 
+                { BOARD_RED, BOARD_GREEN, BOARD_BLUE });
+
+        if(tmpSurface == NULL){
+            SDL_Log("SDL_Texture_Wrapper: Failed to create surface from string (%s): %s\n",
+                    _text.c_str(), SDL_GetError());
+            return false;
+        }
+
+        _texture = SDL_CreateTextureFromSurface(board::getRenderer(), tmpSurface);
+
+        if(_texture == NULL){
+            SDL_Log("SDL_Texture_Wrapper: failed to create texture from surface of \
+                    string (%s): %s\n",
+                    _text.c_str(), SDL_GetError());
+            SDL_FreeSurface(tmpSurface);
+            return false;
+        }
+
+        //texture was created sucessfully, cleanup surface
+
+        SDL_FreeSurface(tmpSurface);
+        SDL_UnlockTexture(_texture);
+
+        return true;
+
+    } else { //not a valid state, return nothing
+        SDL_Log("SDL_Texture_Wrapper::load() : In an invalid state! Cannot load anything! \
+                (%s %lu) (%s)\n", _fs._font.c_str(), _fs._ptsize, _text.c_str());
+        return false;
+    }
+}
+
+SDL_Texture* SDL_Texture_Wrapper::texture() {
+    if(_texture == nullptr)
+        load();
     return _texture;
 }
 
@@ -164,6 +203,7 @@ SDL_Texture* SDL_Texture_Wrapper::texture() const {
 
 SDL_Font_Wrapper::SDL_Font_Wrapper(){
     _font = nullptr;
+    _fs = { "", 0 };
 }
 
 SDL_Font_Wrapper::~SDL_Font_Wrapper(){
@@ -171,27 +211,37 @@ SDL_Font_Wrapper::~SDL_Font_Wrapper(){
         TTF_CloseFont(_font);
 }
 
+SDL_Font_Wrapper::SDL_Font_Wrapper(const SDL_Font_Wrapper& rhs){
+    _font = nullptr;
+    _fs = rhs._fs;
+}
+
 SDL_Font_Wrapper::SDL_Font_Wrapper(const font_path& fp, const size_t ptsize){
-    _font = TTF_OpenFont(fp.c_str(), ptsize);
+    _font = nullptr;
+    _fs._font = fp;
+    _fs._ptsize = ptsize;
+}
+
+SDL_Font_Wrapper::SDL_Font_Wrapper(const font_and_size& fs)
+    : _fs(fs) {
+    _font = nullptr;
+}
+
+bool SDL_Font_Wrapper::load(){
+    _font = TTF_OpenFont(_fs._font.c_str(), _fs._ptsize);
     
     if(_font == NULL){
         SDL_Log("SDL_Font_Wrapper: Failed to open font (%s) with ptsize (%lu): %s\n",
-                fp.c_str(), ptsize, SDL_GetError());
-        return;
+                _fs._font.c_str(), _fs._ptsize, SDL_GetError());
+        return false;
     }
-}
-
-SDL_Font_Wrapper::SDL_Font_Wrapper(const font_and_size& fs){
-    _font = TTF_OpenFont(fs._font.c_str(), fs._ptsize);
     
-    if(_font == NULL){
-        SDL_Log("SDL_Font_Wrapper: Failed to open font (%s) with ptsize (%lu): %s\n",
-                fs._font.c_str(), fs._ptsize, SDL_GetError());
-        return;
-    }
+    return true;
 }
 
-TTF_Font* SDL_Font_Wrapper::font() const {
+TTF_Font* SDL_Font_Wrapper::font() {
+    if(_font == nullptr)
+        load();
     return _font;
 }
 
@@ -335,8 +385,9 @@ void board::start(){
 void board::initConstResources(){
     //load all resrouces declared in config.hpp
     std::string fullPath = DATA_DIR;
-
+    SDL_Log("Allocating all static resources...\n");
     SDL_Log("Base path: %s", fullPath.c_str());
+    std::cerr << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     //load images into memory
     fullPath = DATA_IMG;
@@ -346,39 +397,54 @@ void board::initConstResources(){
     for(unsigned int i = 0; 
             i < (sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0])); ++i){
 
+        SDL_Texture_Wrapper tw(fullPath + IMAGE_LOCATIONS[0]);
+
         SDL_Log("Loaded image %s at memory location %p\n",
                 IMAGE_LOCATIONS[i],
-                setImage(fullPath + IMAGE_LOCATIONS[0]));
+                setImage(IMAGE_LOCATIONS[0],
+                    tw));
     }
     SDL_Log("Loaded static images into working memory\n");
+    std::cerr << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
     //load fonts into memory
     fullPath = DATA_FONT;
     fullPath += "/";
+    SDL_Log("Static Fonts directory prefix: %s\n", fullPath.c_str());
     SDL_Log("Loading fonts into working memory...\n");
     for(unsigned int i = 0;
             i < (sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0])); ++i){
 
+        SDL_Font_Wrapper fw(fullPath + FONT_LOCATIONS[0]._name, 
+                FONT_LOCATIONS[0]._size);
+
         SDL_Log("Loaded font %s %lu at memory location %p\n",
                 FONT_LOCATIONS[i]._name,
                 FONT_LOCATIONS[i]._size,
-                setFont({FONT_LOCATIONS[i]._name, FONT_LOCATIONS[i]._size}));
+                setFont({FONT_LOCATIONS[i]._name, FONT_LOCATIONS[i]._size},
+                    fw));
     }
     SDL_Log("Loaded fonts into working memory\n");
-
+    std::cerr << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
     SDL_Log("Loading static strings into working memory...\n");
     for(unsigned int i = 0;
             i < (sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0])); ++i){
+
+        SDL_Texture_Wrapper tw(CONST_STRINGS[i]._text,
+                { CONST_STRINGS[i]._font_size._name,
+                  CONST_STRINGS[i]._font_size._size });
+
         SDL_Log("Loaded string (\"%s\") with font %s %lu at memory location %p\n",
                 CONST_STRINGS[i]._text,
                 CONST_STRINGS[i]._font_size._name,
                 CONST_STRINGS[i]._font_size._size,
-                setString(CONST_STRINGS[i]._text,
+                setString({ CONST_STRINGS[i]._text,
                     { CONST_STRINGS[i]._font_size._name,
-                      CONST_STRINGS[i]._font_size._size }));
+                      CONST_STRINGS[i]._font_size._size }},
+                      tw));
     }
     SDL_Log("Loaded static strings into working memory\n");
-
+    std::cerr << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -406,8 +472,9 @@ SDL_Texture* board::getImage(const std::string& path){
 }
 
 TTF_Font* board::getFont(const font_and_size& fs){
-    if(_fonts.find(fs) != _fonts.end())
+    if(_fonts.find(fs) != _fonts.end()){
         return _fonts.find(fs)->second.font();
+    }
 
     //TODO: Dynamic Fonts? Is the needed?
     //not found, return null
@@ -420,12 +487,27 @@ SDL_Texture* board::setString(const std::string& text, const font_and_size& fs){
     return _strings[sf].texture();
 }
 
-SDL_Texture* board::setImage(const std::string& path){
-    _textures.insert_or_assign(path, SDL_Texture_Wrapper(path));
-    return _textures[path].texture();
+SDL_Texture* board::setImage(const std::string& name){
+    _textures.insert_or_assign(name, SDL_Texture_Wrapper(name));
+    return _textures[name].texture();
 }
 
 TTF_Font* board::setFont(const font_and_size& fs){
     _fonts.insert_or_assign(fs, SDL_Font_Wrapper(fs));
+    return _fonts[fs].font();
+}
+
+SDL_Texture* board::setString(const string_and_font& sf, const SDL_Texture_Wrapper& tw){
+    _strings.insert_or_assign(sf, tw);
+    return _strings[sf].texture();
+}
+
+SDL_Texture* board::setImage(const std::string& name, const SDL_Texture_Wrapper& tw){
+    _textures.insert_or_assign(name, tw);
+    return _textures[name].texture();
+}
+
+TTF_Font* board::setFont(const font_and_size& fs, const SDL_Font_Wrapper& fw){
+    _fonts.insert_or_assign(fs, fw);
     return _fonts[fs].font();
 }
