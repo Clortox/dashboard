@@ -8,8 +8,8 @@
 
 #include "panel.hpp"
 
-#include "weather_config.hpp"
 #include <chrono>
+#include "../util/rss.hpp"
 
 #include <SDL.h>
 #include <SDL2/SDL_image.h>
@@ -26,8 +26,12 @@ namespace dashboard::panel {
         void draw();
 
     private:
+        void update();
+
+        rss_utils::rss _rss;
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;
         std::chrono::milliseconds  _update_interval;
-        void update();
     };
 }
+
+#include "../board.hpp"

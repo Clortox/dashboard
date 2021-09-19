@@ -359,6 +359,7 @@ void board::start(){
         //SDL_RenderClear(_renderer);
 
         //PLACEHOLDER, cycle color
+        /*
         {
             static uint8_t red = 0;
             static bool up = true;
@@ -378,6 +379,7 @@ void board::start(){
                 red --;
             }
         }
+        */
         //END PLACEHOLDER
 
 

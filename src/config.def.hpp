@@ -119,5 +119,8 @@ struct FONT_SIZE_STRING {
     const FONT_SIZE _font_size;
 };
 static const FONT_SIZE_STRING CONST_STRINGS[] = {
-    { "Test string 12345", { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
+    //Weather strings
+    { "Today's Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
+    { "Sunny"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
+    { "Rainy"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
 };
