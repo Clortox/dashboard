@@ -87,7 +87,7 @@ constexpr char DATA_IMG[] = DATA_IMG_;
 // IMAGE_LOCATIONS
 // Locations of all static images used
 static const char* IMAGE_LOCATIONS[] = {
-    "img/bmp_24.png",
+    "bmp_24.png",
 };
 
 // FONT_DIR
@@ -102,7 +102,7 @@ struct FONT_SIZE {
     const size_t _size;
 };
 static const FONT_SIZE FONT_LOCATIONS[] = {
-    { "elianto-normal.ttf", 24 },
+    { "Roboto_Mono/RobotoMono-Medium.ttf", 24 },
 };
 
 // CONST_STRINGS
@@ -112,5 +112,5 @@ struct FONT_SIZE_STRING {
     const FONT_SIZE _font_size;
 };
 static const FONT_SIZE_STRING CONST_STRINGS[] = {
-    { "Test string 12345", FONT_LOCATIONS[1] },
+    { "Test string 12345", { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
 };
