@@ -9,10 +9,13 @@
 #include "config.hpp"
 
 #include "util/lru.hpp"
+#include "panel/panel.hpp"
 
 #include <functional>
 #include <unordered_map>
 #include <string.h>
+#include <chrono>
+#include <thread>
 
 #include <SDL.h>
 #include <SDL2/SDL_image.h>
@@ -29,7 +32,6 @@ namespace dashboard {
         bool operator< (const font_and_size&) const;
         bool operator>=(const font_and_size&) const;
         bool operator<=(const font_and_size&) const;
-        
     };
 
     struct string_and_font {
@@ -126,7 +128,6 @@ namespace dashboard {
         SDL_Texture* setImage (const std::string&);
         TTF_Font*    setFont  (const font_and_size&);
 
-        //TODO make set* functions that accept SDL_*_Wrapper objects
         SDL_Texture* setString(const string_and_font&, const SDL_Texture_Wrapper&);
         SDL_Texture* setImage (const std::string&, const SDL_Texture_Wrapper&);
         TTF_Font*    setFont  (const font_and_size&, const SDL_Font_Wrapper&);
@@ -138,11 +139,12 @@ namespace dashboard {
         inline static std::unordered_map<string_and_font, SDL_Texture_Wrapper, 
             string_and_font_hash> _strings;
 
-        static clortox::LRUCache<string_and_font, 
+        inline static clortox::LRUCache<string_and_font, 
             SDL_Texture_Wrapper, string_and_font_hash> _dynamic_strings;
-
+        
         //TODO: Dynamic images?
         //TODO: Dynamic Fonts?
+        
 
         //local pointers to the globals
         SDL_Window* _window;

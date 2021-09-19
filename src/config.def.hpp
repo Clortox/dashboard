@@ -71,6 +71,16 @@ constexpr int IMG_FLAGS = 0
     //| IMG_INIT_TIF
     ;
 
+// PANELS
+// A list of all panels to be displayed, in order
+// Be sure to include the panel definition below, then add it to the system
+#include "panel/panel.hpp"
+#include "panel/weather.hpp"
+static dashboard::panel::panel* PANELS[] = {
+    new dashboard::panel::weather(),
+
+};
+
 // DATA_DIR
 // Where all resources will be
 // Keep this as DATA to use the install dir set in the makefile
@@ -80,9 +90,6 @@ constexpr char DATA_DIR[]  = DATA_ ;
 // Where all images are
 // Keep this a DATA_IMG_ to use the DATA_IMG dir defined in the makefile
 constexpr char DATA_IMG[] = DATA_IMG_;
-
-//TODO: Add directory prefix for each of these, and change it so it doesnt use
-//that whole path as the key for the file
 
 // IMAGE_LOCATIONS
 // Locations of all static images used

@@ -370,12 +370,64 @@ int board::init(){
 // This is where most of the logic lives
 void board::start(){
     initConstResources();
+    //get Panel size
+    const size_t panel_count = sizeof(PANELS) / sizeof(PANELS[0]);
+    size_t i = 0;
+
+    //timing, for dealing with framerates
+    auto start = std::chrono::high_resolution_clock::now();
+    static const std::chrono::nanoseconds s{1000000000};
+
+    //frame counter
+    static unsigned long long int fcount = 0;
 
     SDL_Log("Starting main loop...\n");
     for(;;){
+        start = std::chrono::high_resolution_clock::now();
+        fcount++;
 
+        //check if we can loop back over
+        if(i > panel_count)
+            i = 0;
+
+        //SDL_RenderClear(_renderer);
+
+        //PLACEHOLDER, cycle color
+        {
+            static uint8_t red = 0;
+            static bool up = true;
+
+            SDL_SetRenderDrawColor(_renderer, red, 
+                    BOARD_GREEN, BOARD_BLUE, SDL_ALPHA_OPAQUE);
+
+            SDL_RenderClear(_renderer);
+
+            if(up){
+                if(red == 254)
+                    up = false;
+                red++;
+            } else {
+                if(red == 1)
+                    up = true;
+                red --;
+            }
+        }
+        //END PLACEHOLDER
+
+
+        //call draw on the current panel
+        PANELS[i]->draw();
+
+        std::cerr << "Current frame: " << fcount << "\n";
+
+        SDL_RenderPresent(_renderer);
+
+
+        //wait for frame
+        std::this_thread::sleep_for((s / MAX_FRAMERATE) -
+                std::chrono::duration_cast<std::chrono::nanoseconds>(
+                    std::chrono::high_resolution_clock::now() - start));
     }
-
 }
 
 ///////////////////////////////////////

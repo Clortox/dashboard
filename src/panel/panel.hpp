@@ -17,7 +17,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-namespace dashboard {
+namespace dashboard::panel {
     class panel {
     public:
         panel() = default;
