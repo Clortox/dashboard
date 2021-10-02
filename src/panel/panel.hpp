@@ -26,5 +26,8 @@ namespace dashboard::panel {
         virtual void draw() = 0;
     
         size_t _time_on_screen = 0;
+
+    protected:
+        SDL_Texture* _texture;
     };
 }

@@ -24,8 +24,9 @@ Depends on
 optional dependencies
 ---------------------
 
-- rapidxml
-- libcurl
+- Weather/RSS
+  - rapidxml
+  - libcurl
 
 Building sdl2 on rpi
 --------------------

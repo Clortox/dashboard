@@ -95,6 +95,9 @@ constexpr char DATA_IMG[] = DATA_IMG_;
 // Locations of all static images used
 static const char* IMAGE_LOCATIONS[] = {
     "bmp_24.png",
+    //Weather
+    "sunny.png",
+    "rainy.png",
 };
 
 // FONT_DIR

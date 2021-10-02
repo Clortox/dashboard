@@ -337,7 +337,6 @@ int board::init(){
 void board::start(){
     initConstResources();
     //get Panel size
-    const size_t panel_count = sizeof(PANELS) / sizeof(PANELS[0]);
     size_t i = 0;
 
     //timing, for dealing with framerates
@@ -353,13 +352,12 @@ void board::start(){
         fcount++;
 
         //check if we can loop back over
-        if(i > panel_count)
+        if(i > PANELS_LENGTH)
             i = 0;
 
-        //SDL_RenderClear(_renderer);
+        SDL_RenderClear(_renderer);
 
         //PLACEHOLDER, cycle color
-        /*
         {
             static uint8_t red = 0;
             static bool up = true;
@@ -379,12 +377,11 @@ void board::start(){
                 red --;
             }
         }
-        */
         //END PLACEHOLDER
 
 
         //call draw on the current panel
-        PANELS[i]->draw();
+        //PANELS[i]->draw();
 
         if(fcount % 10 == 0)
             std::cerr << "Frame : " << fcount << "\n";
@@ -416,7 +413,7 @@ void board::initConstResources(){
     SDL_Log("Static images directory prefix: %s\n", fullPath.c_str());
     SDL_Log("Loading static images into working memory...\n");
     for(unsigned int i = 0; 
-            i < (sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0])); ++i){
+            i < IMAGE_LOCATIONS_LENGTH; ++i){
 
         SDL_Texture_Wrapper tw(fullPath + IMAGE_LOCATIONS[0]);
 
@@ -434,7 +431,7 @@ void board::initConstResources(){
     SDL_Log("Static Fonts directory prefix: %s\n", fullPath.c_str());
     SDL_Log("Loading fonts into working memory...\n");
     for(unsigned int i = 0;
-            i < (sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0])); ++i){
+            i < FONT_LOCATIONS_LENGTH; ++i){
 
         SDL_Font_Wrapper fw(fullPath + FONT_LOCATIONS[0]._name, 
                 FONT_LOCATIONS[0]._size);
@@ -449,7 +446,7 @@ void board::initConstResources(){
     std::cerr << "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n";
     SDL_Log("Loading static strings into working memory...\n");
     for(unsigned int i = 0;
-            i < (sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0])); ++i){
+            i < CONST_STRINGS_LENGTH; ++i){
 
         SDL_Texture_Wrapper tw(CONST_STRINGS[i]._text,
                 { CONST_STRINGS[i]._font_size._name,
