@@ -76,10 +76,8 @@ constexpr int IMG_FLAGS = 0
 // Be sure to include the panel definition below, then add it to the system
 #include "panel/panel.hpp"
 #include "panel/weather.hpp"
-static dashboard::panel::panel* PANELS[] = {
-    new dashboard::panel::weather(),
-
-};
+extern dashboard::panel::panel* PANELS[];
+extern size_t PANELS_LENGTH;
 
 // DATA_DIR
 // Where all resources will be
@@ -93,12 +91,8 @@ constexpr char DATA_IMG[] = DATA_IMG_;
 
 // IMAGE_LOCATIONS
 // Locations of all static images used
-static const char* IMAGE_LOCATIONS[] = {
-    "bmp_24.png",
-    //Weather
-    "sunny.png",
-    "rainy.png",
-};
+extern const char* IMAGE_LOCATIONS[];
+extern size_t IMAGE_LOCATIONS_LENGTH;
 
 // FONT_DIR
 // Where all fonts are kept
@@ -111,9 +105,8 @@ struct FONT_SIZE {
     const char* _name;
     const size_t _size;
 };
-static const FONT_SIZE FONT_LOCATIONS[] = {
-    { "Roboto_Mono/RobotoMono-Medium.ttf", 24 },
-};
+extern const FONT_SIZE FONT_LOCATIONS[];
+extern size_t FONT_LOCATIONS_LENGTH;
 
 // CONST_STRINGS
 // All constant strings
@@ -121,9 +114,5 @@ struct FONT_SIZE_STRING {
     const char* _text;
     const FONT_SIZE _font_size;
 };
-static const FONT_SIZE_STRING CONST_STRINGS[] = {
-    //Weather strings
-    { "Today's Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
-    { "Sunny"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
-    { "Rainy"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
-};
+extern const FONT_SIZE_STRING CONST_STRINGS[];
+extern size_t CONST_STRINGS_LENGTH;
