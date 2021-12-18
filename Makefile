@@ -50,6 +50,8 @@ all : $(OBJ)
 src/config.hpp :
 	cp src/config.def.hpp src/config.hpp
 
+open : all
+	$(BIN)/$(TARGET)
 
 $(OBJ): src/config.hpp
 
