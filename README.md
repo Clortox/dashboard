@@ -2,7 +2,7 @@ dashboard
 =========
 
 My dashboard, for my house. Display RSS feeds and other custom bits of info via
-html. This isnt pretty, its just meant to work
+direct SDL2 calls. 
 
 Features/TODO
 =============
@@ -30,6 +30,7 @@ optional dependencies
 
 Building sdl2 on rpi
 --------------------
+
 Run in this order
 ```
 sudo apt-get install libdrm-dev libgdm-dev
