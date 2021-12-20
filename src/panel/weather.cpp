@@ -132,6 +132,6 @@ void weather::initTexture(){
                 SDL_TEXTUREACCESS_TARGET, 
                 SCREEN_WIDTH, SCREEN_HEIGHT);
 
-        SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_NONE);
+        SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
     }
 }

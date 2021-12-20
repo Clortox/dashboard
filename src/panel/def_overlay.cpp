@@ -115,12 +115,11 @@ void def_overlay::update_texture() {
     TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
             date_time.c_str(),
             &tgt.w, &tgt.h);
-    tgt.x = SCREEN_WIDTH - tgt.w - 5;
-    tgt.y = 0;
+    tgt.x = SCREEN_WIDTH - tgt.w + 25;
+    tgt.y = -5;
     SDL_RenderCopy(board::getRenderer(),
             board::getString(date_time.c_str(),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 28 }), NULL, &tgt);
-
 
 
 

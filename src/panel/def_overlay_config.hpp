@@ -11,10 +11,10 @@
 namespace dashboard::panel {
     //How long should we wait between updates? in ms
     //Default 10 s
-    constexpr size_t DEF_OVERLAY_UPDATE_INTERVAL = 10000;
+    constexpr size_t DEF_OVERLAY_UPDATE_INTERVAL = 500;
 
     //Height of the bar on the top and bottom, in pixels
-    constexpr size_t DEF_OVERLAY_BAR_HEIGHT = 45;
+    constexpr size_t DEF_OVERLAY_BAR_HEIGHT = 60;
 
     //Text color
     constexpr uint8_t DEF_OVERLAY_TEXT_RED    = 0xCC;
@@ -22,8 +22,8 @@ namespace dashboard::panel {
     constexpr uint8_t DEF_OVERLAY_TEXT_BLUE   = 0xCC;
     constexpr uint8_t DEF_OVERLAY_TEXT_ALPHA  = 0xFF;
 
-    constexpr uint8_t DEF_OVERLAY_BAR_RED     = 0xAA;
-    constexpr uint8_t DEF_OVERLAY_BAR_GREEN   = 0xAA;
-    constexpr uint8_t DEF_OVERLAY_BAR_BLUE    = 0xAA;
-    constexpr uint8_t DEF_OVERLAY_BAR_ALPHA   = 0xFF;
+    constexpr uint8_t DEF_OVERLAY_BAR_RED     = 0x00;
+    constexpr uint8_t DEF_OVERLAY_BAR_GREEN   = 0x00;
+    constexpr uint8_t DEF_OVERLAY_BAR_BLUE    = 0x00;
+    constexpr uint8_t DEF_OVERLAY_BAR_ALPHA   = 0xCC;
 }

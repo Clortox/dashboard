@@ -368,27 +368,25 @@ void board::start(){
         SDL_RenderClear(_renderer);
 
         //PLACEHOLDER, cycle color
-        /*
         {
-            static uint8_t red = 0;
+            static uint8_t green = 0;
             static bool up = true;
 
-            SDL_SetRenderDrawColor(_renderer, red, 
-                    BOARD_GREEN, BOARD_BLUE, SDL_ALPHA_OPAQUE);
+            SDL_SetRenderDrawColor(_renderer, BOARD_RED, 
+                    green, BOARD_BLUE, SDL_ALPHA_OPAQUE);
 
             SDL_RenderClear(_renderer);
 
             if(up){
-                if(red == 254)
+                if(green == 254)
                     up = false;
-                red++;
+                green++;
             } else {
-                if(red == 1)
+                if(green == 1)
                     up = true;
-                red --;
+                green --;
             }
         }
-        */
         //END PLACEHOLDER
 
 
