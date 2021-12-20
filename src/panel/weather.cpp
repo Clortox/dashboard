@@ -35,8 +35,6 @@ weather::~weather(){
 ///////////////////////////////////////////////////////////////////////////////
 
 void weather::draw(){
-    std::cerr << "WEATHER::DRAW\n";
-
     //create the texture if this is the first time running draw
     if(_texture == nullptr)
         initTexture();
@@ -44,7 +42,6 @@ void weather::draw(){
     //check if its time to update
     if((std::chrono::high_resolution_clock::now() - _last_update) 
             > _update_interval){
-        std::cerr << "UPDATING WEATHER IF STATEMENT\n";
         //TODO multithread this
         update();
 
@@ -80,11 +77,7 @@ void weather::update() {
 void weather::update_texture(){
     std::cerr << "WEATHER::UPDATE_TEXTURE\n";
 
-    int ret = SDL_SetRenderTarget(board::getRenderer(), _texture);
-    std::cerr << "ret : " << ret << "\n";
-    std::cerr << "Renderer : " << board::getRenderer() << "\n";
-    if(ret != 0)
-        SDL_Log("ERROR : %s\n", SDL_GetError());
+    SDL_SetRenderTarget(board::getRenderer(), _texture);
 
 
     SDL_Rect tgt;
@@ -96,16 +89,9 @@ void weather::update_texture(){
             _rss.getTitle().c_str(),
             &tgt.w, &tgt.h);
 
-    std::cerr << "tgt.w : " << tgt.w << "\n";
-    std::cerr << "tgt.h : " << tgt.h << "\n";
-    std::cerr << "board::getString : " << board::getString(_rss.getTitle(),{ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }) << "\n";
-
-    ret = SDL_RenderCopy(board::getRenderer(), 
-            //board::getString(_rss.getTitle(), 
+    SDL_RenderCopy(board::getRenderer(), 
             board::getString(_rss.getTitle(), 
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
-
-    std::cerr << "ret : " << ret << "\n";
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
 }
