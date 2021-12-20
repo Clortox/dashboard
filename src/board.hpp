@@ -173,7 +173,7 @@ SDL_Window* dashboard::board::getWindow(){
 SDL_Renderer* dashboard::board::getRenderer(){
     if(_renderer == nullptr){
         _renderer = SDL_CreateRenderer(board::getWindow(), -1,
-                SDL_RENDERER_ACCELERATED);
+                SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE);
 
         if(_renderer == NULL)
             SDL_Log("Renderer could not be created, %s\n", SDL_GetError());

@@ -29,5 +29,6 @@ namespace dashboard::panel {
 
     protected:
         SDL_Texture* _texture;
+        virtual void initTexture() = 0;
     };
 }

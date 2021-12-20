@@ -159,7 +159,8 @@ bool SDL_Texture_Wrapper::load(){
         }
 
         tmpSurface = TTF_RenderText_Solid(fs_font, _text.c_str(), 
-                { BOARD_RED, BOARD_GREEN, BOARD_BLUE });
+                //{ BOARD_RED, BOARD_GREEN, BOARD_BLUE });
+                { 0xCC, 0xCC, 0xCC });
 
         if(tmpSurface == NULL){
             SDL_Log("SDL_Texture_Wrapper: Failed to create surface from string (%s): %s\n",
@@ -358,6 +359,7 @@ void board::start(){
         SDL_RenderClear(_renderer);
 
         //PLACEHOLDER, cycle color
+        /*
         {
             static uint8_t red = 0;
             static bool up = true;
@@ -377,11 +379,12 @@ void board::start(){
                 red --;
             }
         }
+        */
         //END PLACEHOLDER
 
 
         //call draw on the current panel
-        //PANELS[i]->draw();
+        PANELS[i]->draw();
 
         if(fcount % 10 == 0)
             std::cerr << "Frame : " << fcount << "\n";

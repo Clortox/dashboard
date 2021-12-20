@@ -28,6 +28,7 @@ namespace dashboard::panel {
     private:
         void update();
         void update_texture();
+        void initTexture();
 
         rss_utils::rss _rss;
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;
