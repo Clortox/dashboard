@@ -159,8 +159,7 @@ bool SDL_Texture_Wrapper::load(){
         }
 
         tmpSurface = TTF_RenderText_Solid(fs_font, _text.c_str(), 
-                //{ BOARD_RED, BOARD_GREEN, BOARD_BLUE });
-                { 0xCC, 0xCC, 0xCC });
+                { 0xFF, 0xFF, 0xFF });
 
         if(tmpSurface == NULL){
             SDL_Log("SDL_Texture_Wrapper: Failed to create surface from string (%s): %s\n",
