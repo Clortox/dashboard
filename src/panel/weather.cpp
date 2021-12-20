@@ -44,17 +44,12 @@ void weather::draw(){
     //check if its time to update
     if((std::chrono::high_resolution_clock::now() - _last_update) 
             > _update_interval){
-        //TODO multithread this
         update();
 
         update_texture();
     }
 
     SDL_RenderCopy(board::getRenderer(), _texture, NULL, NULL);
-
-
-    //TODO add this all to one texture
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////
