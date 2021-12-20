@@ -31,6 +31,7 @@ size_t IMAGE_LOCATIONS_LENGTH = sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0
 //};
 const FONT_SIZE FONT_LOCATIONS[] = {
     { "Roboto_Mono/RobotoMono-Medium.ttf", 24 },
+    { "Roboto_Mono/RobotoMono-Medium.ttf", 36 },
 };
 size_t FONT_LOCATIONS_LENGTH = sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0]);
 
@@ -42,8 +43,8 @@ size_t FONT_LOCATIONS_LENGTH = sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0]);
 //};
 const FONT_SIZE_STRING CONST_STRINGS[] = {
     //Weather strings
-    { "Today's Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
-    { "Sunny"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
-    { "Rainy"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
+    { "Today's Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 36 } },
+    //{ "Sunny"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
+    //{ "Rainy"          , { "Roboto_Mono/RobotoMono-Medium.ttf", 24 } },
 };
 size_t CONST_STRINGS_LENGTH = sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0]);

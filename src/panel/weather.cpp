@@ -95,32 +95,32 @@ void weather::update_texture(){
     //title
     tgt.x = 50;
     tgt.y = 50;
-    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }),
-            _rss.getTitle().c_str(),
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 36 }),
+            "Today's Weather",
             &tgt.w, &tgt.h);
     SDL_RenderCopy(board::getRenderer(), 
-            board::getString(_rss.getTitle().c_str(), 
-                { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
+            board::getString("Today's Weather", 
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 36 }), NULL, &tgt);
 
     //current weather
-    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }),
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 36 }),
             current_desc.c_str(),
             &tgt.w, &tgt.h);
     tgt.x = SCREEN_WIDTH / 2 - (tgt.w / 2);
     tgt.y = SCREEN_HEIGHT / 2 - (tgt.h / 2);
     SDL_RenderCopy(board::getRenderer(),
             board::getString(current_desc.c_str(),
-                { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 36 }), NULL, &tgt);
 
     //tommorow's weather
-    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }),
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 36 }),
             tommorow_desc.c_str(),
             &tgt.w, &tgt.h);
     tgt.x = SCREEN_WIDTH / 2 - (tgt.w / 2);
     tgt.y = SCREEN_HEIGHT / 2 - (tgt.h / 2) + 30;
     SDL_RenderCopy(board::getRenderer(),
             board::getString(tommorow_desc.c_str(),
-                { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 36 }), NULL, &tgt);
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
 }
