@@ -16,5 +16,5 @@ namespace dashboard::panel {
 
     //How long should we wait between updates? in ms
     //Default 1 hour
-    constexpr size_t UPDATE_INTERVAL = 3600000;
+    constexpr size_t WEATHER_UPDATE_INTERVAL = 3600000;
 }

@@ -395,6 +395,9 @@ void board::start(){
         //call draw on the current panel
         PANELS[i]->draw();
 
+        //draw the overlay panel
+        OVERLAY->draw();
+
         if(fcount % 10 == 0)
             std::cerr << "Frame : " << fcount << "\n";
 

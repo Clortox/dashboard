@@ -76,8 +76,13 @@ constexpr int IMG_FLAGS = 0
 // Be sure to include the panel definition below, then add it to the system
 #include "panel/panel.hpp"
 #include "panel/weather.hpp"
+#include "panel/def_overlay.hpp"
 extern dashboard::panel::panel* PANELS[];
 extern size_t PANELS_LENGTH;
+
+// OVERLAY
+// This is a special panel that is overlayed on top of all other panels
+extern dashboard::panel::panel* OVERLAY;
 
 // DATA_DIR
 // Where all resources will be

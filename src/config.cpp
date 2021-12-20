@@ -13,6 +13,10 @@ dashboard::panel::panel* PANELS[] = {
 };
 size_t PANELS_LENGTH = sizeof(PANELS)/sizeof(PANELS[0]);
 
+// OVERLAY
+// This is a special panel that is overlayed on top of all other panels
+dashboard::panel::panel* OVERLAY = new dashboard::panel::def_overlay();
+
 // IMAGE_LOCATIONS
 // Locations of all static images used
 const char* IMAGE_LOCATIONS[] = {

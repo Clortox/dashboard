@@ -16,7 +16,7 @@ using namespace dashboard::panel;
 weather::weather(){
     std::cerr << "WEATHER CONSTRUCTOR\n";
     _time_on_screen = WEATHER_DEFAULT_ON_SCREEN_TIME;
-    _update_interval = std::chrono::milliseconds{UPDATE_INTERVAL};
+    _update_interval = std::chrono::milliseconds{WEATHER_UPDATE_INTERVAL};
     //let set to default, will make it so it updates the texture ASAP
     //_last_update;
     _rss = rss_utils::rss(WEATHER_URL_SOURCE);
@@ -86,6 +86,7 @@ void weather::update_texture(){
     SDL_Rect tgt;
 
     SDL_SetRenderTarget(board::getRenderer(), _texture);
+    SDL_RenderClear(board::getRenderer());
 
     //title
     tgt.x = 50;
