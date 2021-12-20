@@ -24,6 +24,13 @@ data, several threads, etc, **it is the panel's responsibility to implement
 this**. The **board** provides a memory API, however you do not have to use
 it.
 
+Each *panel* also has an `initTexture()` function that you must implement. This
+should initialize the texture and should be called in your draw function. It is
+up to you to call this, to give you the option of lazy loading it. 
+*This must be called in `draw()` or later, not in the constructor*. This is
+because SDL will not be setup when your constructor is called, and therefore
+will not be able to properly create the texture for the renderer.
+
 The provided memory api stores textures (SDL_Texture), fonts (TTF_Font), and
 strings (SDL_Texture). Both static values can be added that will exist for the
 lifetime of the program, as well as dynamic versions that will be stored in a
