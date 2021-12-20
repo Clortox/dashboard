@@ -16,6 +16,7 @@
 #include <SDL2/SDL_ttf.h>
 
 #include <iostream>
+#include <string>
 
 namespace dashboard::panel {
     class weather : public panel {
@@ -29,6 +30,10 @@ namespace dashboard::panel {
         void update();
         void update_texture();
         void initTexture();
+
+        std::string current_desc;
+        std::string tommorow_desc;
+
 
         rss_utils::rss _rss;
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;

@@ -15,7 +15,6 @@ using namespace dashboard::panel;
 
 weather::weather(){
     std::cerr << "WEATHER CONSTRUCTOR\n";
-    //std::cerr << "Current Renderer : " << board::getRenderer() << "\n";
     _time_on_screen = WEATHER_DEFAULT_ON_SCREEN_TIME;
     _update_interval = std::chrono::milliseconds{UPDATE_INTERVAL};
     //let set to default, will make it so it updates the texture ASAP
@@ -36,8 +35,11 @@ weather::~weather(){
 
 void weather::draw(){
     //create the texture if this is the first time running draw
-    if(_texture == nullptr)
+    if(_texture == nullptr){
         initTexture();
+        update();
+        update_texture();
+    }
 
     //check if its time to update
     if((std::chrono::high_resolution_clock::now() - _last_update) 
@@ -68,6 +70,16 @@ void weather::update() {
 
     //fetch updates
     _rss.update();
+
+    //update internal state
+
+    current_desc = _rss.getItem(0).getDescription();
+    current_desc = current_desc.substr(0,current_desc.find('<'));
+    std::cerr << "Current Description : (\" " << current_desc << "\")\n";
+
+    tommorow_desc = _rss.getItem(1).getDescription();
+    tommorow_desc = tommorow_desc.substr(0,tommorow_desc.find('<'));
+    std::cerr << "Tommorow Description : (\" " << tommorow_desc << "\")\n";
 }
 
 ///////////////////////////////////////
@@ -87,19 +99,28 @@ void weather::update_texture(){
             _rss.getTitle().c_str(),
             &tgt.w, &tgt.h);
     SDL_RenderCopy(board::getRenderer(), 
-            board::getString(_rss.getTitle(), 
+            board::getString(_rss.getTitle().c_str(), 
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
 
     //current weather
     TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }),
-            _rss.getItem(0).getTitle().c_str(),
+            current_desc.c_str(),
             &tgt.w, &tgt.h);
     tgt.x = SCREEN_WIDTH / 2 - (tgt.w / 2);
     tgt.y = SCREEN_HEIGHT / 2 - (tgt.h / 2);
     SDL_RenderCopy(board::getRenderer(),
-            board::getString(_rss.getItem(0).getTitle().c_str(),
+            board::getString(current_desc.c_str(),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
 
+    //tommorow's weather
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }),
+            tommorow_desc.c_str(),
+            &tgt.w, &tgt.h);
+    tgt.x = SCREEN_WIDTH / 2 - (tgt.w / 2);
+    tgt.y = SCREEN_HEIGHT / 2 - (tgt.h / 2) + 30;
+    SDL_RenderCopy(board::getRenderer(),
+            board::getString(tommorow_desc.c_str(),
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
 }

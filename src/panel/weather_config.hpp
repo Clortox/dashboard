@@ -16,6 +16,5 @@ namespace dashboard::panel {
 
     //How long should we wait between updates? in ms
     //Default 1 hour
-    //constexpr size_t UPDATE_INTERVAL = 3600000;
-    constexpr size_t UPDATE_INTERVAL = 5000;
+    constexpr size_t UPDATE_INTERVAL = 3600000;
 }
