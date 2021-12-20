@@ -32,6 +32,7 @@ size_t IMAGE_LOCATIONS_LENGTH = sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0
 const FONT_SIZE FONT_LOCATIONS[] = {
     { "Roboto_Mono/RobotoMono-Medium.ttf", 24 },
     { "Roboto_Mono/RobotoMono-Medium.ttf", 36 },
+    { "Roboto_Mono/RobotoMono-Medium.ttf", 50 },
 };
 size_t FONT_LOCATIONS_LENGTH = sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0]);
 
