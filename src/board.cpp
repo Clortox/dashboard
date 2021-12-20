@@ -346,13 +346,23 @@ void board::start(){
     //frame counter
     static unsigned long long int fcount = 0;
 
+    //time since last panel
+    auto last_panel = start;
+
     SDL_Log("Starting main loop...\n");
     for(;;){
         start = std::chrono::high_resolution_clock::now();
         fcount++;
 
+        //check if its time to increment the panel
+        if(std::chrono::duration_cast<std::chrono::milliseconds>(
+                    start - last_panel).count() >= PANELS[i]->_time_on_screen){
+            i++;
+            last_panel = start;
+        }
+
         //check if we can loop back over
-        if(i > PANELS_LENGTH)
+        if(i >= PANELS_LENGTH)
             i = 0;
 
         SDL_RenderClear(_renderer);

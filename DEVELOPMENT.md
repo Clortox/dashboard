@@ -31,6 +31,10 @@ up to you to call this, to give you the option of lazy loading it.
 because SDL will not be setup when your constructor is called, and therefore
 will not be able to properly create the texture for the renderer.
 
+The *_time_on_screen* value is in milliseconds, and will be the amount of time
+the board will display the panel before transitioning. This value can be
+modified at runtime if needed (ie displaying a dynamic length video).
+
 The provided memory api stores textures (SDL_Texture), fonts (TTF_Font), and
 strings (SDL_Texture). Both static values can be added that will exist for the
 lifetime of the program, as well as dynamic versions that will be stored in a
