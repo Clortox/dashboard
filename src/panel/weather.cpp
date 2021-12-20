@@ -76,11 +76,9 @@ void weather::update() {
 // _rss
 void weather::update_texture(){
     std::cerr << "WEATHER::UPDATE_TEXTURE\n";
+    SDL_Rect tgt;
 
     SDL_SetRenderTarget(board::getRenderer(), _texture);
-
-
-    SDL_Rect tgt;
 
     //title
     tgt.x = 50;
@@ -88,10 +86,20 @@ void weather::update_texture(){
     TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }),
             _rss.getTitle().c_str(),
             &tgt.w, &tgt.h);
-
     SDL_RenderCopy(board::getRenderer(), 
             board::getString(_rss.getTitle(), 
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
+
+    //current weather
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 24 }),
+            _rss.getItem(0).getTitle().c_str(),
+            &tgt.w, &tgt.h);
+    tgt.x = SCREEN_WIDTH / 2 - (tgt.w / 2);
+    tgt.y = SCREEN_HEIGHT / 2 - (tgt.h / 2);
+    SDL_RenderCopy(board::getRenderer(),
+            board::getString(_rss.getItem(0).getTitle().c_str(),
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 24 }), NULL, &tgt);
+
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
 }
