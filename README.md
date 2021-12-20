@@ -7,8 +7,8 @@ direct SDL2 calls.
 Features/TODO
 =============
 
-- Write straight to framebuffer (sdl2)
-- Display Weather rss feed
+- Write straight to framebuffer (sdl2) (DONE)
+- Display Weather rss feed (DONE)
 - Display camera feed
 - Display who is home
 - Display network speed
