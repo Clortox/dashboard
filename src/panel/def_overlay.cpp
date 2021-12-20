@@ -106,7 +106,20 @@ void def_overlay::update_texture() {
     tgt.h = DEF_OVERLAY_BAR_HEIGHT;
     SDL_RenderFillRect(board::getRenderer(), &tgt);
 
+    //change to text color
+    SDL_SetRenderDrawColor(board::getRenderer(),
+            DEF_OVERLAY_TEXT_RED, DEF_OVERLAY_TEXT_GREEN, 
+            DEF_OVERLAY_TEXT_BLUE, DEF_OVERLAY_TEXT_ALPHA);
 
+    //show the date and time
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+            date_time.c_str(),
+            &tgt.w, &tgt.h);
+    tgt.x = SCREEN_WIDTH - tgt.w - 5;
+    tgt.y = 0;
+    SDL_RenderCopy(board::getRenderer(),
+            board::getString(date_time.c_str(),
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 28 }), NULL, &tgt);
 
 
 
@@ -117,8 +130,6 @@ void def_overlay::update_texture() {
     //reset back to the old render color
     SDL_SetRenderDrawColor(board::getRenderer(),
             o_red, o_green, o_blue, o_alpha);
-
-    std::cerr << "Leaving overlay texture\n";
 }
 
 ///////////////////////////////////////
