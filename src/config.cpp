@@ -24,6 +24,7 @@ const char* IMAGE_LOCATIONS[] = {
     "bmp_24.png",
     "sky.png",
     "wifi_background.jpg",
+    "wifi.png",
 };
 size_t IMAGE_LOCATIONS_LENGTH = sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0]);
 

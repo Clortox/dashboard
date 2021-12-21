@@ -69,8 +69,29 @@ void wifi::update_texture(){
     SDL_RenderCopy(board::getRenderer(),
             board::getImage("wifi_background.jpg"), NULL, NULL);
 
+    //place the title
+    tgt.x = 50;
+    tgt.y = 50;
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
+            "Wireless",
+            &tgt.w, &tgt.h);
+    //Note about the string "Wireless"
+    //Because this is only called once, it makes more sense to not have
+    //"Wireless" as a static string, and instead generate it dynamically once,
+    //copy it into this _texture, and then delete if once it goes out of the
+    //LRU. This way, we dont waste memory holding a string we only copy once
+    SDL_RenderCopy(board::getRenderer(),
+            board::getString("Wireless",
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
 
-
+    //show the QRCode
+    tgt.x = -25;
+    tgt.y = tgt.h;
+    tgt.w = (SCREEN_WIDTH / 2) ;
+    std::cerr << "TGT.W : " << tgt.w << "\n";
+    tgt.h = tgt.w;
+    SDL_RenderCopy(board::getRenderer(),
+            board::getImage("wifi.png"), NULL, &tgt);
 
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);

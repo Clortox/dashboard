@@ -83,5 +83,7 @@ for you. You can add your SSID and password by editing the `WIFI_SSID` and
 image.
 
 The qr code generation relies on the program `qrencode`. It can be installed on
-any debian system using `sudo apt install qrencode`
+any debian system using `sudo apt install qrencode`. By default the image has a
+transparent background. If you would like a different background, you will need
+to adjust wifi.cpp to adjust where it is located to your preference.
 
