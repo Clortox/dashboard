@@ -17,6 +17,7 @@ weather::weather(){
     std::cerr << "WEATHER CONSTRUCTOR\n";
     _time_on_screen = WEATHER_DEFAULT_ON_SCREEN_TIME;
     _update_interval = std::chrono::milliseconds{WEATHER_UPDATE_INTERVAL};
+    _texture = nullptr;
     //let set to default, will make it so it updates the texture ASAP
     //_last_update;
     _rss = rss_utils::rss(WEATHER_URL_SOURCE);
