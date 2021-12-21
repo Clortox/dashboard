@@ -30,6 +30,9 @@ namespace dashboard::panel {
 
     protected:
         SDL_Texture* _texture;
+
+        virtual void update() = 0;
+        virtual void update_texture() = 0;
         virtual void initTexture() = 0;
     };
 }
