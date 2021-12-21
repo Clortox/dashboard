@@ -65,9 +65,9 @@ void def_overlay::update() {
     _last_update = std::chrono::high_resolution_clock::now();
 
     //get current date and time
-    std::time_t curr_time = std::chrono::system_clock::to_time_t(
-            std::chrono::system_clock::now());
-    date_time = std::ctime(&curr_time);
+    std::time_t curr_time = std::time(nullptr);
+    std::strftime(date_time, sizeof(date_time), 
+            DEF_OVERLAY_DATE_STRING, std::localtime(&curr_time));
 }
 
 ///////////////////////////////////////
@@ -114,12 +114,12 @@ void def_overlay::update_texture() {
 
     //show the date and time
     TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
-            date_time.c_str(),
+            date_time,
             &tgt.w, &tgt.h);
-    tgt.x = SCREEN_WIDTH - tgt.w + 25;
+    tgt.x = SCREEN_WIDTH - tgt.w - 5;
     tgt.y = -5;
     SDL_RenderCopy(board::getRenderer(),
-            board::getString(date_time.c_str(),
+            board::getString(std::string(date_time),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
 
 

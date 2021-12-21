@@ -30,7 +30,7 @@ namespace dashboard::panel {
         void update_texture();
         void initTexture();
 
-        std::string date_time;
+        char date_time [100];
 
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;
         std::chrono::milliseconds _update_interval;
