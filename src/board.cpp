@@ -368,6 +368,7 @@ void board::start(){
         SDL_RenderClear(_renderer);
 
         //PLACEHOLDER, cycle color
+        /*
         {
             static uint8_t green = 0;
             static bool up = true;
@@ -387,6 +388,7 @@ void board::start(){
                 green --;
             }
         }
+        */
         //END PLACEHOLDER
 
 
@@ -428,11 +430,11 @@ void board::initConstResources(){
     for(unsigned int i = 0; 
             i < IMAGE_LOCATIONS_LENGTH; ++i){
 
-        SDL_Texture_Wrapper tw(fullPath + IMAGE_LOCATIONS[0]);
+        SDL_Texture_Wrapper tw(fullPath + IMAGE_LOCATIONS[i]);
 
         SDL_Log("Loaded image %s at memory location %p\n",
                 IMAGE_LOCATIONS[i],
-                setImage(IMAGE_LOCATIONS[0],
+                setImage(IMAGE_LOCATIONS[i],
                     tw));
     }
     SDL_Log("Loaded static images into working memory\n");
@@ -446,8 +448,8 @@ void board::initConstResources(){
     for(unsigned int i = 0;
             i < FONT_LOCATIONS_LENGTH; ++i){
 
-        SDL_Font_Wrapper fw(fullPath + FONT_LOCATIONS[0]._name, 
-                FONT_LOCATIONS[0]._size);
+        SDL_Font_Wrapper fw(fullPath + FONT_LOCATIONS[i]._name, 
+                FONT_LOCATIONS[i]._size);
 
         SDL_Log("Loaded font %s %lu at memory location %p\n",
                 FONT_LOCATIONS[i]._name,
