@@ -10,3 +10,6 @@ bin/*
 
 #ignore config file
 src/config.hpp
+
+#ignore wifi image
+img/wifi.png

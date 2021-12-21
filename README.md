@@ -9,6 +9,7 @@ Features/TODO
 
 - Write straight to framebuffer (sdl2) (DONE)
 - Display Weather rss feed (DONE)
+- Display Wifi qrcode (DONE)
 - Display camera feed
 - Display who is home
 - Display network speed
@@ -70,3 +71,17 @@ To install:
 To uninstall:
 
 `make uninstall`
+
+Wifi
+----
+
+The makefile by default will call a script that will generate a wifi qr code
+for you. You can add your SSID and password by editing the `WIFI_SSID` and
+`WIFI_PASS` variables in the make file, or by calling the script yourself in
+`./scripts`. You can cleanup the wifi image at any time by calling 
+`make clean-wifi`. Next time the executable is built it will regenerate the
+image.
+
+The qr code generation relies on the program `qrencode`. It can be installed on
+any debian system using `sudo apt install qrencode`
+

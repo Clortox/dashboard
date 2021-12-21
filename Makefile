@@ -39,6 +39,9 @@ DEFINITIONS  = -DDATA_='"$(DATA)"'
 DEFINITIONS += -DDATA_IMG_='"$(DATA_IMG)"'
 DEFINITIONS += -DDATA_FONT_='"$(DATA_FONT)"'
 
+WIFI_SSID = "DEFAULT_WIFI"
+WIFI_PASS = "DEFAULT_PASS"
+
 all : $(OBJ)
 	@echo LD $@
 	@$(CC) $(FLAGS) $(CFLAGS) -o $(BIN)/$(TARGET) $(OBJ) $(LIBRARIES)
@@ -50,10 +53,13 @@ all : $(OBJ)
 src/config.hpp :
 	cp src/config.def.hpp src/config.hpp
 
+img/wifi.png : 
+	./scripts/wifi.sh $(WIFI_SSID) $(WIFI_PASS)
+
 open : all
 	$(BIN)/$(TARGET)
 
-$(OBJ): src/config.hpp
+$(OBJ): src/config.hpp img/wifi.png
 
 install : all
 	mkdir -p $(PREFIX)/bin
@@ -72,6 +78,9 @@ uninstall :
 clean :
 	find . -type f -name '*.o' -delete
 	rm -rf $(BIN)/*
+
+clean-wifi:
+	rm -f ./img/wifi.png
 
 clean-config :
 	rm -rf src/config.hpp
