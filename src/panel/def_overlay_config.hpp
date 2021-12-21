@@ -29,5 +29,5 @@ namespace dashboard::panel {
 
     //for more on how this string format works, refer to
     //https://en.cppreference.com/w/cpp/chrono/c/strftime
-    constexpr char DEF_OVERLAY_DATE_STRING[]  = "%a %R %p";
+    constexpr char DEF_OVERLAY_DATE_STRING[]  = "%a %I:%M %p";
 }
