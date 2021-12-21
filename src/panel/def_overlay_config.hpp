@@ -22,8 +22,8 @@ namespace dashboard::panel {
     constexpr uint8_t DEF_OVERLAY_TEXT_BLUE   = 0xCC;
     constexpr uint8_t DEF_OVERLAY_TEXT_ALPHA  = 0xFF;
 
-    constexpr uint8_t DEF_OVERLAY_BAR_RED     = 0x00;
-    constexpr uint8_t DEF_OVERLAY_BAR_GREEN   = 0x00;
-    constexpr uint8_t DEF_OVERLAY_BAR_BLUE    = 0x00;
-    constexpr uint8_t DEF_OVERLAY_BAR_ALPHA   = 0xCC;
+    constexpr uint8_t DEF_OVERLAY_BAR_RED     = 0xD3;
+    constexpr uint8_t DEF_OVERLAY_BAR_GREEN   = 0xD3;
+    constexpr uint8_t DEF_OVERLAY_BAR_BLUE    = 0xD3;
+    constexpr uint8_t DEF_OVERLAY_BAR_ALPHA   = 0x7F;
 }

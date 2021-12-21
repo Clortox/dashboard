@@ -88,6 +88,10 @@ void weather::update_texture(){
     SDL_SetRenderTarget(board::getRenderer(), _texture);
     SDL_RenderClear(board::getRenderer());
 
+    //background image
+    SDL_RenderCopy(board::getRenderer(),
+            board::getImage("sky.png"), NULL, NULL);
+
     //title
     tgt.x = 50;
     tgt.y = 50;

@@ -37,7 +37,6 @@ def_overlay::~def_overlay(){
 void def_overlay::draw(){
     //create the texture if this is the first time running draw
     if(_texture == nullptr){
-        std::cerr << "IN FIRST SETUP\n";
         initTexture();
         update();
         update_texture();
@@ -89,6 +88,8 @@ void def_overlay::update_texture() {
     SDL_SetRenderDrawColor(board::getRenderer(),
             0x00, 0x00, 0x00, 0x00);
 
+    SDL_RenderClear(board::getRenderer());
+
     //set the new color
     SDL_SetRenderDrawColor(board::getRenderer(),
             DEF_OVERLAY_BAR_RED, DEF_OVERLAY_BAR_GREEN, 
@@ -112,16 +113,14 @@ void def_overlay::update_texture() {
             DEF_OVERLAY_TEXT_BLUE, DEF_OVERLAY_TEXT_ALPHA);
 
     //show the date and time
-    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
             date_time.c_str(),
             &tgt.w, &tgt.h);
     tgt.x = SCREEN_WIDTH - tgt.w + 25;
     tgt.y = -5;
     SDL_RenderCopy(board::getRenderer(),
             board::getString(date_time.c_str(),
-                { "Roboto_Mono/RobotoMono-Medium.ttf", 28 }), NULL, &tgt);
-
-
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
 
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);

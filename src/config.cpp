@@ -21,6 +21,7 @@ dashboard::panel::panel* OVERLAY = new dashboard::panel::def_overlay();
 // Locations of all static images used
 const char* IMAGE_LOCATIONS[] = {
     "bmp_24.png",
+    "sky.png",
 };
 size_t IMAGE_LOCATIONS_LENGTH = sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0]);
 
