@@ -10,6 +10,7 @@
 // A list of all panels to be displayed, in order
 dashboard::panel::panel* PANELS[] = {
     new dashboard::panel::weather(),
+    new dashboard::panel::wifi(),
 };
 size_t PANELS_LENGTH = sizeof(PANELS)/sizeof(PANELS[0]);
 
@@ -22,6 +23,7 @@ dashboard::panel::panel* OVERLAY = new dashboard::panel::def_overlay();
 const char* IMAGE_LOCATIONS[] = {
     "bmp_24.png",
     "sky.png",
+    "wifi_background.jpg",
 };
 size_t IMAGE_LOCATIONS_LENGTH = sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0]);
 

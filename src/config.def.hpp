@@ -77,6 +77,7 @@ constexpr int IMG_FLAGS = 0
 #include "panel/panel.hpp"
 #include "panel/weather.hpp"
 #include "panel/def_overlay.hpp"
+#include "panel/wifi.hpp"
 extern dashboard::panel::panel* PANELS[];
 extern size_t PANELS_LENGTH;
 
