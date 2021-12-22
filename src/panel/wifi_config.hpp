@@ -9,7 +9,7 @@
 namespace dashboard::panel {
     //This will be displayed at the top left on the status bar. Set to a blank
     //string to not show anything
-    constexpr char WIFI_TITLE[] = "Wirless";
+    constexpr char WIFI_TITLE[] = "Wireless";
 
     //Default time the slid is shown on the screen, in ms
     //Default 15s
