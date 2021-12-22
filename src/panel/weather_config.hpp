@@ -12,7 +12,7 @@ namespace dashboard::panel {
 
     //Default time the slide is shown on screen, in ms
     //Default 5s
-    constexpr size_t WEATHER_DEFAULT_ON_SCREEN_TIME = 5000;
+    constexpr size_t WEATHER_DEFAULT_ON_SCREEN_TIME = 15000;
 
     //How long should we wait between updates? in ms
     //Default 1 hour
