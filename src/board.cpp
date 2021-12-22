@@ -365,32 +365,8 @@ void board::start(){
         if(i >= PANELS_LENGTH)
             i = 0;
 
+        //clear the screen
         SDL_RenderClear(_renderer);
-
-        //PLACEHOLDER, cycle color
-        /*
-        {
-            static uint8_t green = 0;
-            static bool up = true;
-
-            SDL_SetRenderDrawColor(_renderer, BOARD_RED, 
-                    green, BOARD_BLUE, SDL_ALPHA_OPAQUE);
-
-            SDL_RenderClear(_renderer);
-
-            if(up){
-                if(green == 254)
-                    up = false;
-                green++;
-            } else {
-                if(green == 1)
-                    up = true;
-                green --;
-            }
-        }
-        */
-        //END PLACEHOLDER
-
 
         //call draw on the current panel
         PANELS[i]->draw();
