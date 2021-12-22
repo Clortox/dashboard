@@ -156,6 +156,8 @@ void wifi::initTexture(){
     }
 }
 
+///////////////////////////////////////
+// Curl callback function
 size_t dashboard::panel::wifi::curl_callback(void* contents, size_t size, 
         size_t nmemb, void* userp){
     ((std::string*)userp)->append((char*)contents, size * nmemb);
