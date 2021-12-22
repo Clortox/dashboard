@@ -21,7 +21,6 @@ weather::weather(){
     _title = WEATHER_TITLE;
     //let set to default, will make it so it updates the texture ASAP
     //_last_update;
-    _rss = rss_utils::rss(WEATHER_URL_SOURCE);
 }
 
 weather::~weather(){
@@ -66,17 +65,10 @@ void weather::update() {
     _last_update = std::chrono::high_resolution_clock::now();
 
     //fetch updates
-    _rss.update();
 
     //update internal state
-
-    current_desc = _rss.getItem(0).getDescription();
-    current_desc = current_desc.substr(0,current_desc.find('<'));
-    std::cerr << "Current Description : (\" " << current_desc << "\")\n";
-
-    tommorow_desc = _rss.getItem(1).getDescription();
-    tommorow_desc = tommorow_desc.substr(0,tommorow_desc.find('<'));
-    std::cerr << "Tommorow Description : (\" " << tommorow_desc << "\")\n";
+    current_desc = "CURRENT DESC PLACEHOLDER";
+    tommorow_desc = "TOMMOROW DESC PLACEHOLDER";
 }
 
 ///////////////////////////////////////
