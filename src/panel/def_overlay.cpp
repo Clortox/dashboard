@@ -122,13 +122,16 @@ void def_overlay::update_texture() {
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
 
     //show the current panel title (stored in _title)
-    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
-            _title.c_str(),
-            &tgt.w, &tgt.h);
-    tgt.x = 5; tgt.y = -5;
-    SDL_RenderCopy(board::getRenderer(),
-            board::getString(_title,
-                { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+    //if its blank, dont show anything
+    if(!_title.empty()){
+        TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
+                _title.c_str(),
+                &tgt.w, &tgt.h);
+        tgt.x = 5; tgt.y = -5;
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(_title,
+                    { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+    }
 
     
 
