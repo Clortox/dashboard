@@ -86,12 +86,33 @@ void wifi::update_texture(){
 
     //show the QRCode
     tgt.x = -25;
-    tgt.y = tgt.h;
+    tgt.y = tgt.h - 6;
     tgt.w = (SCREEN_WIDTH / 2) ;
-    std::cerr << "TGT.W : " << tgt.w << "\n";
     tgt.h = tgt.w;
     SDL_RenderCopy(board::getRenderer(),
             board::getImage("wifi.png"), NULL, &tgt);
+
+    std::string network_string("Network: ");
+    network_string += WIFI_NETWORK_NAME;
+
+    //show info about the network
+    tgt.x = (SCREEN_WIDTH / 2) + 25;
+    tgt.y = 50;
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
+            network_string.c_str(), &tgt.w, &tgt.h);
+    SDL_RenderCopy(board::getRenderer(),
+            board::getString(network_string.c_str(),
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+
+    tgt.y += tgt.h + 25;
+    std::string password_string("Password: ");
+    password_string += WIFI_NETWORK_PASS;
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
+            password_string.c_str(), &tgt.w, &tgt.h);
+    SDL_RenderCopy(board::getRenderer(),
+            board::getString(password_string.c_str(),
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+
 
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
