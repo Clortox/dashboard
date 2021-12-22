@@ -47,8 +47,26 @@ size_t FONT_LOCATIONS_LENGTH = sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0]);
 //    const FONT_SIZE _font_size;
 //};
 const FONT_SIZE_STRING CONST_STRINGS[] = {
-    //Weather strings
+    //Overlay strings
     { "Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
     { "Wireless", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+
+    //Weather strings
+    { "Clear Skies", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Slightly cloudy", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Moderately cloudy", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Very cloudy", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Very humid", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Light rain", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Rain", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Overcast with showers", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Moderate showers", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Light snow", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Moderate snow", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Rain and snow", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Currently,", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Tommorow,", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Day after,", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+
 };
 size_t CONST_STRINGS_LENGTH = sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0]);
