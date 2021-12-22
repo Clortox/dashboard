@@ -49,5 +49,6 @@ size_t FONT_LOCATIONS_LENGTH = sizeof(FONT_LOCATIONS)/sizeof(FONT_LOCATIONS[0]);
 const FONT_SIZE_STRING CONST_STRINGS[] = {
     //Weather strings
     { "Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Wireless", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
 };
 size_t CONST_STRINGS_LENGTH = sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0]);
