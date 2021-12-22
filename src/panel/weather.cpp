@@ -18,6 +18,7 @@ weather::weather(){
     _time_on_screen = WEATHER_DEFAULT_ON_SCREEN_TIME;
     _update_interval = std::chrono::milliseconds{WEATHER_UPDATE_INTERVAL};
     _texture = nullptr;
+    _title = WEATHER_TITLE;
     //let set to default, will make it so it updates the texture ASAP
     //_last_update;
     _rss = rss_utils::rss(WEATHER_URL_SOURCE);
@@ -92,16 +93,6 @@ void weather::update_texture(){
     //background image
     SDL_RenderCopy(board::getRenderer(),
             board::getImage("sky.png"), NULL, NULL);
-
-    //title
-    tgt.x = 50;
-    tgt.y = 50;
-    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
-            "Today's Weather",
-            &tgt.w, &tgt.h);
-    SDL_RenderCopy(board::getRenderer(), 
-            board::getString("Today's Weather", 
-                { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
 
     //current weather
     TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),

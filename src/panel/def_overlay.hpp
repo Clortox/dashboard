@@ -25,6 +25,7 @@ namespace dashboard::panel {
 
         void draw();
 
+
     private:
         void update();
         void update_texture();

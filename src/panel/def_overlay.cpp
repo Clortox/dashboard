@@ -19,8 +19,7 @@ def_overlay::def_overlay(){
     _time_on_screen = 0;
     _update_interval = std::chrono::milliseconds{DEF_OVERLAY_UPDATE_INTERVAL};
     _texture = nullptr;
-    //let set to default, will make it so it updates the texture ASAP
-    //_last_update;
+    _title = "";
 }
 
 def_overlay::~def_overlay(){
@@ -121,6 +120,17 @@ void def_overlay::update_texture() {
     SDL_RenderCopy(board::getRenderer(),
             board::getString(std::string(date_time),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+
+    //show the current panel title (stored in _title)
+    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
+            _title.c_str(),
+            &tgt.w, &tgt.h);
+    tgt.x = 5; tgt.y = -5;
+    SDL_RenderCopy(board::getRenderer(),
+            board::getString(_title,
+                { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+
+    
 
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);

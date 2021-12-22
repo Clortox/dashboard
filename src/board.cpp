@@ -348,6 +348,7 @@ void board::start(){
 
     //time since last panel
     auto last_panel = start;
+    OVERLAY->_title = PANELS[0]->_title;
 
     SDL_Log("Starting main loop...\n");
     for(;;){
@@ -359,6 +360,7 @@ void board::start(){
                     start - last_panel).count() >= PANELS[i]->_time_on_screen){
             i++;
             last_panel = start;
+            OVERLAY->_title = PANELS[i]->_title;
         }
 
         //check if we can loop back over

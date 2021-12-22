@@ -7,6 +7,8 @@
 #include "wifi.hpp"
 #include "wifi_config.hpp"
 
+#include "def_overlay_config.hpp"
+
 using namespace dashboard::panel;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -17,6 +19,7 @@ wifi::wifi(){
     std::cerr << "WIFI CONSTRUCTOR\n";
     _texture = nullptr;
     _time_on_screen = WIFI_DEFAULT_TIME_ON_SCREEN;
+    _title = WIFI_TITLE;
 }
 
 wifi::~wifi(){
@@ -69,16 +72,10 @@ void wifi::update_texture(){
     SDL_RenderCopy(board::getRenderer(),
             board::getImage("wifi_background.jpg"), NULL, NULL);
 
-    //place the title
-    tgt.x = 50;
-    tgt.y = 50;
-    TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
-            "Wireless",
-            &tgt.w, &tgt.h);
-    //Note about the string "Wireless"
+    //Note about the strings here
     //Because this is only called once, it makes more sense to not have
-    //"Wireless" as a static string, and instead generate it dynamically once,
-    //copy it into this _texture, and then delete if once it goes out of the
+    //any of these as static strings and instead generate them dynamically once,
+    //copy it into this _texture, and then delete it once it goes out of the
     //LRU. This way, we dont waste memory holding a string we only copy once
     SDL_RenderCopy(board::getRenderer(),
             board::getString("Wireless",
@@ -86,7 +83,7 @@ void wifi::update_texture(){
 
     //show the QRCode
     tgt.x = -25;
-    tgt.y = tgt.h - 6;
+    tgt.y = DEF_OVERLAY_BAR_HEIGHT;
     tgt.w = (SCREEN_WIDTH / 2) ;
     tgt.h = tgt.w;
     SDL_RenderCopy(board::getRenderer(),

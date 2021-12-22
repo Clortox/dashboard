@@ -16,17 +16,19 @@
 #include <SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <string>
 
 namespace dashboard::panel {
     class panel {
     public:
         panel() = default;
-        ~panel() = default;
+        virtual ~panel() = default;
 
         virtual void draw() = 0;
     
         //in milliseconds
         size_t _time_on_screen = 0;
+        std::string _title;
 
     protected:
         SDL_Texture* _texture;
