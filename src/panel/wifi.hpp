@@ -12,6 +12,8 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
+#include <curl/curl.h>
+
 #include <iostream>
 
 namespace dashboard::panel {
@@ -26,6 +28,8 @@ namespace dashboard::panel {
         void update_texture();
         void initTexture();
     };
+
+    size_t curl_callback(void*, size_t, size_t, void*);
 }
 
 #include "../board.hpp"

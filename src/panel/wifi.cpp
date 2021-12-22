@@ -97,7 +97,7 @@ void wifi::update_texture(){
 
     //show info about the network
     tgt.x = (SCREEN_WIDTH / 2) + 25;
-    tgt.y = 50;
+    tgt.y = 60;
     TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
             network_string.c_str(), &tgt.w, &tgt.h);
     SDL_RenderCopy(board::getRenderer(),
@@ -113,6 +113,31 @@ void wifi::update_texture(){
             board::getString(password_string.c_str(),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
 
+    //Get public ip address and display it
+    if(WIFI_SHOW_PUBLIC_IP){
+        std::string public_ip = "WAN IP: ";
+        CURL* curl;
+        curl = curl_easy_init();
+
+        if(curl){
+            CURLcode res;
+            curl_easy_setopt(curl, CURLOPT_URL, WIFI_PUBLIC_IP_URL);
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, 
+                    dashboard::panel::curl_callback);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &public_ip);
+            res = curl_easy_perform(curl);
+            curl_easy_cleanup(curl);
+        } else {
+            public_ip += "Unkown";
+        }
+
+        tgt.y += tgt.h + 25;
+        TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
+                public_ip.c_str(), &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(public_ip.c_str(),
+                    { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+    }
 
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
@@ -132,4 +157,10 @@ void wifi::initTexture(){
 
         SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
     }
+}
+
+size_t dashboard::panel::curl_callback(void* contents, size_t size, 
+        size_t nmemb, void* userp){
+    ((std::string*)userp)->append((char*)contents, size * nmemb);
+    return size * nmemb;
 }
