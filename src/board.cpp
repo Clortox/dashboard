@@ -358,14 +358,12 @@ void board::start(){
         //check if its time to increment the panel
         if(std::chrono::duration_cast<std::chrono::milliseconds>(
                     start - last_panel).count() >= PANELS[i]->_time_on_screen){
-            i++;
-            last_panel = start;
-            OVERLAY->_title = PANELS[i]->_title;
-        }
+            i = ++i % PANELS_LENGTH;
 
-        //check if we can loop back over
-        if(i >= PANELS_LENGTH)
-            i = 0;
+            OVERLAY->_title = PANELS[i]->_title;
+
+            last_panel = start;
+        }
 
         //clear the screen
         SDL_RenderClear(_renderer);
