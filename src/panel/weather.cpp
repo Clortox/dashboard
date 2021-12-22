@@ -138,7 +138,7 @@ void weather::update_texture(){
 
     //background image
     SDL_RenderCopy(board::getRenderer(),
-            board::getImage("sky.png"), NULL, NULL);
+            board::getImage("weather_background.png"), NULL, NULL);
 
     //current weather
     tgt.y = 50;
