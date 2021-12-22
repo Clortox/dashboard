@@ -120,7 +120,7 @@ void wifi::update_texture(){
             CURLcode res;
             curl_easy_setopt(curl, CURLOPT_URL, WIFI_PUBLIC_IP_URL);
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, 
-                    dashboard::panel::curl_callback);
+                    dashboard::panel::wifi::curl_callback);
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &public_ip);
             res = curl_easy_perform(curl);
             curl_easy_cleanup(curl);
@@ -156,7 +156,7 @@ void wifi::initTexture(){
     }
 }
 
-size_t dashboard::panel::curl_callback(void* contents, size_t size, 
+size_t dashboard::panel::wifi::curl_callback(void* contents, size_t size, 
         size_t nmemb, void* userp){
     ((std::string*)userp)->append((char*)contents, size * nmemb);
     return size * nmemb;

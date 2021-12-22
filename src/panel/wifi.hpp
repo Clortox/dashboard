@@ -22,6 +22,8 @@ namespace dashboard::panel {
         wifi();
         ~wifi();
 
+        static size_t curl_callback(void*, size_t, size_t, void*);
+
         void draw();
     private:
         void update();
@@ -29,7 +31,6 @@ namespace dashboard::panel {
         void initTexture();
     };
 
-    size_t curl_callback(void*, size_t, size_t, void*);
 }
 
 #include "../board.hpp"
