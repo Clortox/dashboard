@@ -170,6 +170,7 @@ void weather::update_texture(){
     SDL_RenderCopy(board::getRenderer(),
             board::getString(temp.c_str(),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+
     
 
     //tommorow's weather
@@ -202,6 +203,16 @@ void weather::update_texture(){
     SDL_RenderCopy(board::getRenderer(),
             board::getString(temp.c_str(),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+    //icon
+    tgt.w = (SCREEN_WIDTH / 3) - 50;
+    tgt.h = tgt.w;
+    tgt.y = DEF_OVERLAY_BAR_HEIGHT + 25;
+    tgt.x = 0;
+
+    SDL_RenderCopy(board::getRenderer(),
+            board::getImage(weather_tommorow->second),
+            NULL, &tgt);
+
 
     //day after's weather
     TTF_SizeText(board::getFont({ "Roboto_Mono/RobotoMono-Medium.ttf", 50 }),
@@ -233,8 +244,17 @@ void weather::update_texture(){
     SDL_RenderCopy(board::getRenderer(),
             board::getString(temp.c_str(),
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
+    //icon
+    tgt.w = (SCREEN_WIDTH / 3) - 50;
+    tgt.h = tgt.w;
+    tgt.y = DEF_OVERLAY_BAR_HEIGHT + 25;
+    tgt.x = (2*SCREEN_WIDTH / 3);
+    std::cerr << "WEATHER DAY AFTER " << weather_day_after->second << "\n";
+    std::cerr << board::getImage(weather_day_after->second) << "\n";
 
-
+    SDL_RenderCopy(board::getRenderer(),
+            board::getImage(weather_day_after->second),
+            NULL, &tgt);
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
 }

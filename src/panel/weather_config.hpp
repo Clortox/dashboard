@@ -8,6 +8,7 @@
 
 #include <utility>
 #include <string>
+#include "def_overlay_config.hpp"
 
 namespace dashboard::panel {
     //This will be displayed at the top left on the status bar. Set to a blank
@@ -41,14 +42,14 @@ namespace dashboard::panel {
         {"Clear skies", "clearnight.png"};
 
     const std::pair<std::string, std::string> WEATHER_PCLOUDY_DAY = 
-        {"Slightly cloudy", "pcloudyday.png"};
+        {"Slightly cloudy", "cloudyday.png"};
     const std::pair<std::string, std::string> WEATHER_PCLOUDY_NIGHT = 
-        {"Slightly cloudy", "pcloudynight.png"};
+        {"Slightly cloudy", "cloudynight.png"};
 
     const std::pair<std::string, std::string> WEATHER_MCLOUDY_DAY = 
-        {"Moderately cloudy", "mcloudyday.png"};
+        {"Moderately cloudy", "cloudyday.png"};
     const std::pair<std::string, std::string> WEATHER_MCLOUDY_NIGHT = 
-        {"Moderately cloudy", "mcloudynight.png"};
+        {"Moderately cloudy", "cloudynight.png"};
 
     const std::pair<std::string, std::string> WEATHER_CLOUDY_DAY = 
         {"Very cloudy", "cloudyday.png"};
@@ -71,19 +72,19 @@ namespace dashboard::panel {
         {"Rain", "rainnight.png"};
 
     const std::pair<std::string, std::string> WEATHER_OSHOWER_DAY = 
-        {"Overcast with showers", "oshowerday.png"};
+        {"Overcast with showers", "shower.png"};
     const std::pair<std::string, std::string> WEATHER_OSHOWER_NIGHT = 
-        {"Overcast with showers", "oshowernight.png"};
+        {"Overcast with showers", "shower.png"};
 
     const std::pair<std::string, std::string> WEATHER_ISHOWER_DAY = 
-        {"Moderate showers", "ishowerday.png"};
+        {"Moderate showers", "shower.png"};
     const std::pair<std::string, std::string> WEATHER_ISHOWER_NIGHT = 
-        {"Moderate showers", "ishowernight.png"};
+        {"Moderate showers", "shower.png"};
 
     const std::pair<std::string, std::string> WEATHER_LSNOW_DAY = 
-        {"Light snow", "lsnowday.png"};
+        {"Light snow", "snowday.png"};
     const std::pair<std::string, std::string> WEATHER_LSNOW_NIGHT =
-        {"Light snow", "lsnownight.png"};
+        {"Light snow", "snownight.png"};
 
     const std::pair<std::string, std::string> WEATHER_SNOW_DAY = 
         {"Moderate snow", "snowday.png"};
@@ -91,7 +92,7 @@ namespace dashboard::panel {
         {"Moderate snow", "snownight.png"};
 
     const std::pair<std::string, std::string> WEATHER_RAINSNOW_DAY =
-        {"Rain and snow", "rainsnowday.png"};
+        {"Rain and snow", "rainsnow.png"};
     const std::pair<std::string, std::string> WEATHER_RAINSNOW_NIGHT =
-        {"Rain and snow", "rainsnownight.png"};
+        {"Rain and snow", "rainsnow.png"};
 }
