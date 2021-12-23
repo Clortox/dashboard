@@ -78,6 +78,8 @@ constexpr int IMG_FLAGS = 0
 #include "panel/weather.hpp"
 #include "panel/def_overlay.hpp"
 #include "panel/wifi.hpp"
+//uncomment this to use the sample panel
+//#include "panel/sample_panel.hpp"
 extern dashboard::panel::panel* PANELS[];
 extern size_t PANELS_LENGTH;
 

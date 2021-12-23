@@ -9,6 +9,7 @@
 // PANELS
 // A list of all panels to be displayed, in order
 dashboard::panel::panel* PANELS[] = {
+    //new dashboard::panel::sample_panel(),
     new dashboard::panel::weather(),
     new dashboard::panel::wifi(),
 };
@@ -21,6 +22,7 @@ dashboard::panel::panel* OVERLAY = new dashboard::panel::def_overlay();
 // IMAGE_LOCATIONS
 // Locations of all static images used
 const char* IMAGE_LOCATIONS[] = {
+    //sample panel
     //"bmp_24.png",
 
     //wifi
@@ -69,6 +71,8 @@ const FONT_SIZE_STRING CONST_STRINGS[] = {
     //Overlay strings
     { "Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
     { "Wireless", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    //sample panel
+    { "Sample Panel", { "Roboto_Mono/RobotoMono-Medium.ttf", 50} },
 
     //Weather strings
     { "Clear Skies", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
