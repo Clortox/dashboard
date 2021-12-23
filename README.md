@@ -7,14 +7,11 @@ direct SDL2 calls.
 Features/TODO
 =============
 
-- Write straight to framebuffer (sdl2) (DONE)
-- Display Weather rss feed (DONE)
-- Display Wifi qrcode (DONE)
-- Display camera feed
-- Display who is home
-- Display network speed
+- (DONE) Write straight to framebuffer (sdl2) 
+- (DONE) Display Weather ~~rss~~ json feed
+- (DONE) Display Wifi qrcode 
 - Display plex currently playing
-- Play audio files (background music/tracks)?
+- Display camera feed
 
 Depends on
 ==========
