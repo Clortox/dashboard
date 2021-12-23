@@ -29,5 +29,8 @@ namespace dashboard::panel {
 
     //for more on how this string format works, refer to
     //https://en.cppreference.com/w/cpp/chrono/c/strftime
-    constexpr char DEF_OVERLAY_DATE_STRING[]  = "%a %I:%M %p";
+    //
+    //By default will display date in format of
+    //"Wed Dec 22 10:00 PM"
+    constexpr char DEF_OVERLAY_DATE_STRING[]  = "%a %b %d %I:%M %p";
 }
