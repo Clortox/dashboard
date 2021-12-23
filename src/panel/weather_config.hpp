@@ -15,8 +15,9 @@ namespace dashboard::panel {
     //string to not show anything
     constexpr char WEATHER_TITLE[] = "Weather";
 
-    //New York RSS feed
-    static const char* WEATHER_URL_SOURCE = "https://www.7timer.info/bin/civil.php?lon=41.13&lat=-81.48&unit=british&output=json&tzshift=0";
+    //Cuyahoga Falls Weather Feed
+    //static const char* WEATHER_URL_SOURCE = "https://www.7timer.info/bin/civil.php?lon=41.13&lat=-81.48&unit=british&output=json&tzshift=0";
+    constexpr char WEATHER_URL_SOURCE[] = "https://www.7timer.info/bin/civil.php?lon=41.13&lat=-81.48&unit=british&output=json&tzshift=0";
 
     //Default time the slide is shown on screen, in ms
     //Default 15s
