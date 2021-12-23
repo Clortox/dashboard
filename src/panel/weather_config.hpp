@@ -19,7 +19,7 @@ namespace dashboard::panel {
     static const char* WEATHER_URL_SOURCE = "https://www.7timer.info/bin/civil.php?lon=41.13&lat=-81.48&unit=british&output=json&tzshift=0";
 
     //Default time the slide is shown on screen, in ms
-    //Default 5s
+    //Default 15s
     constexpr size_t WEATHER_DEFAULT_ON_SCREEN_TIME = 15000;
 
     //How long should we wait between updates? in ms
