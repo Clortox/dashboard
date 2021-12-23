@@ -25,6 +25,8 @@ namespace dashboard::panel {
         virtual ~panel() = default;
 
         virtual void draw() = 0;
+
+        void forceUpdate();
     
         //in milliseconds
         size_t _time_on_screen = 0;

@@ -361,6 +361,7 @@ void board::start(){
             i = ++i % PANELS_LENGTH;
 
             OVERLAY->_title = PANELS[i]->_title;
+            OVERLAY->forceUpdate();
 
             last_panel = start;
         }
