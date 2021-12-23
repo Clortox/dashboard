@@ -10,6 +10,7 @@
 // A list of all panels to be displayed, in order
 dashboard::panel::panel* PANELS[] = {
     //new dashboard::panel::sample_panel(),
+    new dashboard::panel::plex(),
     new dashboard::panel::weather(),
     new dashboard::panel::wifi(),
 };

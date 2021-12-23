@@ -78,6 +78,7 @@ constexpr int IMG_FLAGS = 0
 #include "panel/weather.hpp"
 #include "panel/def_overlay.hpp"
 #include "panel/wifi.hpp"
+#include "panel/plex.hpp"
 //uncomment this to use the sample panel
 //#include "panel/sample_panel.hpp"
 extern dashboard::panel::panel* PANELS[];
