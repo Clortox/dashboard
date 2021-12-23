@@ -8,7 +8,7 @@ drawing api, to allow you to have as much control over the display as possible.
 dashboard uses a few objects for displaying things to the screen however, to
 interact with the memory management. 
 
-First off, the default configuration is similar to web development "Carousels".
+The default configuration is similar to web development "Carousels".
 A series of **panels** are shown to the user by cycling through one by one.
 
 A **board** is a singleton, and represents the physical display board. 
@@ -24,14 +24,18 @@ data, several threads, etc, **it is the panel's responsibility to implement
 this**. The **board** provides a memory API, however you do not have to use
 it.
 
-Each *panel* also has an `initTexture()` function that you must implement. This
+The **panel** parent class has an `update()` and `update_texture()` function
+you must implement. Use `update()` to update the data for the panel. Use
+`udpate_texture()` to update the `SDL_Texture _texture` each **panel** has
+
+Each **panel** also has an `initTexture()` function that you must implement. This
 should initialize the texture and should be called in your draw function. It is
 up to you to call this, to give you the option of lazy loading it. 
 *This must be called in `draw()` or later, not in the constructor*. This is
 because SDL will not be setup when your constructor is called, and therefore
 will not be able to properly create the texture for the renderer.
 
-The *_time_on_screen* value is in milliseconds, and will be the amount of time
+The **_time_on_screen** value is in milliseconds, and will be the amount of time
 the board will display the panel before transitioning. This value can be
 modified at runtime if needed (ie displaying a dynamic length video).
 
@@ -48,6 +52,9 @@ the **board** object.
 Each **panel** is also recommended to add its own config.hpp file for
 configuring possible settings. All static files that it needs should be placed
 in the main config.hpp file
+
+**See `src/panel/sample_panel*` for an example in code of a simple panel to
+help you get started**
 
 Things you need to implement as a panel creator
 -----------------------------------------------
