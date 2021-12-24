@@ -97,9 +97,9 @@ const FONT_SIZE_STRING CONST_STRINGS[] = {
     { "Day after,", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
 
     //Plex
-    { "Historical", {"Roboto_Mono/RobotoMono-Medium.ttf", 28} }
-    { "Playing", {"Roboto_Mono/RobotoMono-Medium.ttf", 28} }
-    { "Top Users", {"Roboto_Mono/RobotoMono-Medium.ttf", 50} }
+    { "Historical", {"Roboto_Mono/RobotoMono-Medium.ttf", 28} },
+    { "Playing", {"Roboto_Mono/RobotoMono-Medium.ttf", 28} },
+    { "Top Users", {"Roboto_Mono/RobotoMono-Medium.ttf", 50} },
 
 };
 size_t CONST_STRINGS_LENGTH = sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0]);
