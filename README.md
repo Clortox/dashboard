@@ -50,10 +50,8 @@ raspberry pi config
 Developing your own pannels
 ===========================
 
-Refer to the
-[development]
-(DEVELOPMENT.md)
-documentation
+Refer to the [development](DEVELOPMENT.md) documentation
+
 Usage
 =====
 
@@ -84,3 +82,9 @@ any debian system using `sudo apt install qrencode`. By default the image has a
 transparent background. If you would like a different background, you will need
 to adjust wifi.cpp to adjust where it is located to your preference.
 
+Plex
+----
+
+The plex panel relies on you having Tautilli installed on your local network.
+In `plex_config.hpp` just change the IP and Port to your local Tautulli server
+and everything should work.
