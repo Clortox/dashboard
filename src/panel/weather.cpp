@@ -90,6 +90,11 @@ void weather::draw(){
 void weather::update() {
     std::cerr << "WEATHER::UPDATE\n";
     _last_update = std::chrono::high_resolution_clock::now();
+    temp_today = 0; temp_tommorow = 0; temp_day_after = 0;
+    weather_today = nullptr;
+    weather_tommorow = nullptr;
+    weather_day_after = nullptr;
+
 
     //fetch updates
     //do curl setup and cleanup
@@ -102,16 +107,18 @@ void weather::update() {
         curl_easy_setopt(api_curl, CURLOPT_WRITEFUNCTION,
                 dashboard::panel::weather::curl_callback);
         curl_easy_setopt(api_curl, CURLOPT_WRITEDATA, &json_string);
-        CURLcode res = curl_easy_perform(api_curl);
+        curl_easy_perform(api_curl);
         curl_easy_cleanup(api_curl);
         api_curl = nullptr;
     }
 
-    //prase the response
-    json_doc.Parse(json_string.c_str());
+    //parse the response
+    //We clean it up at then end because its wasting space if we dont
+    json_doc = new rapidjson::Document();
+    json_doc->Parse(json_string.c_str());
 
     //update internal state
-    const rapidjson::Value& curr_entry = json_doc["dataseries"];
+    const rapidjson::Value& curr_entry = (*json_doc)["dataseries"];
     //get all entries
     weather_today = &weather_string.at(curr_entry[0]["weather"].GetString());
     weather_tommorow = &weather_string.at(curr_entry[7]["weather"].GetString());
@@ -127,6 +134,9 @@ void weather::update() {
         temp_tommorow = (temp_tommorow * 1.8) + 32;
         temp_day_after = (temp_day_after * 1.8) + 32;
     }
+
+    json_string.clear();
+    delete json_doc;
 }
 
 ///////////////////////////////////////
@@ -176,7 +186,6 @@ void weather::update_texture(){
                 { "Roboto_Mono/RobotoMono-Medium.ttf", 50 }), NULL, &tgt);
 
     //icon
-    std::cerr << weather_today->second << "\n";
     tgt.w = (SCREEN_WIDTH / 3) - 50;
     tgt.h = tgt.w;
     tgt.y = DEF_OVERLAY_BAR_HEIGHT + 25;

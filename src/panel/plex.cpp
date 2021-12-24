@@ -73,12 +73,11 @@ void plex::update(){
 
     //fetch updates
     //CURL object has been setup in the constructor
-    CURLcode res = curl_easy_perform(api_curl);
+    curl_easy_perform(api_curl);
 
     //parse the result
     json_doc.Parse(json_string.c_str());
-
-    std::cerr << json_string << "\n";
+    entries.clear();
 
     //update internal state
     rapidjson::Value& curr_entry = json_doc["response"]["data"]["data"];
@@ -101,6 +100,7 @@ void plex::update(){
         std::cerr << entries[i].state << "\n";
     }
     
+    json_string.clear();
 }
 
 ///////////////////////////////////////
@@ -130,35 +130,37 @@ void plex::update_texture(){
     constexpr int GAP_SIZE = 10;
 
     //draw the outline rectangles
-    tgt.x = GAP_SIZE;
-    tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
-    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
-    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
-    SDL_RenderFillRect(board::getRenderer(), &tgt);
+    {
+        tgt.x = GAP_SIZE;
+        tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+        tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+        tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+        SDL_RenderFillRect(board::getRenderer(), &tgt);
 
-    tgt.x = GAP_SIZE;
-    tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
-    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
-    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
-    SDL_RenderFillRect(board::getRenderer(), &tgt);
+        tgt.x = GAP_SIZE;
+        tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
+        tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+        tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+        SDL_RenderFillRect(board::getRenderer(), &tgt);
 
-    tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
-    tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
-    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
-    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
-    SDL_RenderFillRect(board::getRenderer(), &tgt);
+        tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
+        tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+        tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+        tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+        SDL_RenderFillRect(board::getRenderer(), &tgt);
 
-    tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
-    tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
-    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
-    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
-    SDL_RenderFillRect(board::getRenderer(), &tgt);
+        tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
+        tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
+        tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+        tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+        SDL_RenderFillRect(board::getRenderer(), &tgt);
 
-    tgt.x = ((2*SCREEN_WIDTH) / 3) + GAP_SIZE;
-    tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
-    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
-    tgt.h = (SCREEN_HEIGHT) - (2*DEF_OVERLAY_BAR_HEIGHT) - (2*GAP_SIZE);
-    SDL_RenderFillRect(board::getRenderer(), &tgt);
+        tgt.x = ((2*SCREEN_WIDTH) / 3) + GAP_SIZE;
+        tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+        tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+        tgt.h = (SCREEN_HEIGHT) - (2*DEF_OVERLAY_BAR_HEIGHT) - (2*GAP_SIZE);
+        SDL_RenderFillRect(board::getRenderer(), &tgt);
+    }
 
     //draw info for first box
     {

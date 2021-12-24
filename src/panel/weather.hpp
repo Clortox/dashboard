@@ -51,7 +51,7 @@ namespace dashboard::panel {
 
         CURL* api_curl;
         std::string json_string;
-        rapidjson::Document json_doc;
+        rapidjson::Document* json_doc;
 
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;
         std::chrono::milliseconds  _update_interval;
