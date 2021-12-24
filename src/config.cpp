@@ -75,8 +75,9 @@ const FONT_SIZE_STRING CONST_STRINGS[] = {
     //Overlay strings
     { "Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
     { "Wireless", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+    { "Plex", { "Roboto_Mono/RobotoMono-Medium.ttf", 50} },
     //sample panel
-    { "Sample Panel", { "Roboto_Mono/RobotoMono-Medium.ttf", 50} },
+    //{ "Sample Panel", { "Roboto_Mono/RobotoMono-Medium.ttf", 50} },
 
     //Weather strings
     { "Clear Skies", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
@@ -94,6 +95,11 @@ const FONT_SIZE_STRING CONST_STRINGS[] = {
     { "Currently,", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
     { "Tommorow,", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
     { "Day after,", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
+
+    //Plex
+    { "Historical", {"Roboto_Mono/RobotoMono-Medium.ttf", 28} }
+    { "Playing", {"Roboto_Mono/RobotoMono-Medium.ttf", 28} }
+    { "Top Users", {"Roboto_Mono/RobotoMono-Medium.ttf", 50} }
 
 };
 size_t CONST_STRINGS_LENGTH = sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0]);
