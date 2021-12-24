@@ -48,6 +48,9 @@ namespace dashboard::panel {
         };
 
         std::array<plex_entry, 4> entries;
+        std::string total_plays;
+        std::string total_duration;
+        std::string friendly_name;
 
 
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;

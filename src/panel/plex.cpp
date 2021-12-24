@@ -21,7 +21,7 @@ plex::plex(){
     _title = PLEX_TITLE;
 
     api_curl = curl_easy_init();
-    curl_easy_setopt(api_curl, CURLOPT_URL, PLEX_URL_SOURCE);
+    curl_easy_setopt(api_curl, CURLOPT_URL, PLEX_URL_SOURCE_HISTORY);
     curl_easy_setopt(api_curl, CURLOPT_WRITEFUNCTION,
             dashboard::panel::plex::curl_callback);
     curl_easy_setopt(api_curl, CURLOPT_WRITEDATA, &json_string);
@@ -73,11 +73,11 @@ void plex::update(){
 
     //fetch updates
     //CURL object has been setup in the constructor
+    curl_easy_setopt(api_curl, CURLOPT_URL, PLEX_URL_SOURCE_HISTORY);
     curl_easy_perform(api_curl);
 
     //parse the result
     json_doc.Parse(json_string.c_str());
-    //entries.clear();
 
     //update internal state
     rapidjson::Value& curr_entry = json_doc["response"]["data"]["data"];
@@ -99,6 +99,22 @@ void plex::update(){
         std::cerr << entries[i].title << "\n";
         std::cerr << entries[i].state << "\n";
     }
+
+    //get misc entries for right hand bar
+    total_plays = std::to_string(json_doc["response"]["data"]["recordsTotal"]
+            .GetInt());
+    total_plays = truncate("Plays: " + total_plays, PLEX_MAX_STRING_LENGTH);
+    total_duration = json_doc["response"]["data"]["total_duration"].GetString();
+    total_duration = truncate("Duration: " + total_duration, PLEX_MAX_STRING_LENGTH);
+
+    json_string.clear();
+
+    //make request for friendly server name
+    curl_easy_setopt(api_curl, CURLOPT_URL, PLEX_URL_SOURCE_NAME);
+    curl_easy_perform(api_curl);
+
+    json_doc.Parse(json_string.c_str());
+    friendly_name = truncate(json_doc["response"]["data"].GetString(), PLEX_MAX_STRING_LENGTH - 10);
     
     json_string.clear();
 }
@@ -313,6 +329,38 @@ void plex::update_texture(){
                     {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
                 NULL, &tgt);
     }
+
+    //draw info for right hand side box
+    {
+        tgt.x = ((2*SCREEN_WIDTH) / 3) + GAP_SIZE;
+        tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 50} ),
+                friendly_name.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(friendly_name,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 50}),
+                NULL, &tgt);
+
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28} ),
+                total_plays.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(total_plays,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28}),
+                NULL, &tgt);
+
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28} ),
+                total_duration.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(total_duration,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28}),
+                NULL, &tgt);
+    }
+
 
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);

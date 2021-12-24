@@ -14,7 +14,8 @@ namespace dashboard::panel {
     constexpr char PLEX_TITLE[] = "Plex";
 
     //Tautili endpoint 
-    constexpr char PLEX_URL_SOURCE[] = "http://192.168.1.104:8181/api/v2?apikey=64af06e0497342f7a5862462ddbbd309&cmd=get_history&length=5";
+    constexpr char PLEX_URL_SOURCE_HISTORY[] = "http://192.168.1.104:8181/api/v2?apikey=64af06e0497342f7a5862462ddbbd309&cmd=get_history&length=5";
+    constexpr char PLEX_URL_SOURCE_NAME[] = "http://192.168.1.104:8181/api/v2?apikey=64af06e0497342f7a5862462ddbbd309&cmd=get_server_friendly_name";
 
     //How many characters of a show title should we show?
     constexpr size_t PLEX_MAX_STRING_LENGTH = 35;
