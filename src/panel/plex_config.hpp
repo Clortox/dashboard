@@ -28,10 +28,10 @@ namespace dashboard::panel {
     constexpr size_t PLEX_UPDATE_INTERVAL = 15000;
 
     //Color for background bounding boxes
-    constexpr uint8_t PLEX_BGBOX_RED     = 0xD3;
-    constexpr uint8_t PLEX_BGBOX_GREEN   = 0xD3;
-    constexpr uint8_t PLEX_BGBOX_BLUE    = 0xD3;
-    constexpr uint8_t PLEX_BGBOX_ALPHA   = 0x7F;
+    constexpr uint8_t PLEX_BGBOX_RED     = 0x66;
+    constexpr uint8_t PLEX_BGBOX_GREEN   = 0x66;
+    constexpr uint8_t PLEX_BGBOX_BLUE    = 0x66;
+    constexpr uint8_t PLEX_BGBOX_ALPHA   = 0x99;
 
 
 }
