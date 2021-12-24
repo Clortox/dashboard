@@ -24,8 +24,8 @@ namespace dashboard::panel {
     constexpr size_t PLEX_DEFAULT_ON_SCREEN_TIME = 15000;
 
     //How long should we wait between updates? in ms
-    //Default 30s
-    constexpr size_t PLEX_UPDATE_INTERVAL = 30000;
+    //Default 15
+    constexpr size_t PLEX_UPDATE_INTERVAL = 15000;
 
     //Color for background bounding boxes
     constexpr uint8_t PLEX_BGBOX_RED     = 0xD3;
