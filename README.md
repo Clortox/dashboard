@@ -10,7 +10,7 @@ Features/TODO
 - (DONE) Write straight to framebuffer (sdl2) 
 - (DONE) Display Weather ~~rss~~ json feed
 - (DONE) Display Wifi qrcode 
-- Display plex currently playing
+- (DONE) Display plex currently playing
 - Display camera feed
 
 Depends on
@@ -18,13 +18,21 @@ Depends on
 
 - sdl2
 - stdlib
+- rapidxml
+- rapidjson
+- libcurl
 
 optional dependencies
 ---------------------
 
-- Weather/RSS
-  - rapidxml
+- Weather
+  - rapidjson
   - libcurl
+- Plex 
+  - rapidjson
+  - libcurl
+- Wifi 
+  - qrencode (for generating join code)
 
 Building sdl2 on rpi
 --------------------
@@ -47,7 +55,7 @@ compile the test.cpp file provided in ./tests . There should be output on the
 screen as flashing. Feel free to change the desired graphics driver in the
 raspberry pi config
 
-Developing your own pannels
+Developing your own panels
 ===========================
 
 Refer to the [development](DEVELOPMENT.md) documentation
