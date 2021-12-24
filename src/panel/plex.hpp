@@ -18,7 +18,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
-#include <vector>
+#include <array>
 
 namespace dashboard::panel {
     class plex : public panel {
@@ -47,7 +47,7 @@ namespace dashboard::panel {
             std::string state;
         };
 
-        std::vector<plex_entry> entries;
+        std::array<plex_entry, 4> entries;
 
 
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;

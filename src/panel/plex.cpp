@@ -77,13 +77,13 @@ void plex::update(){
 
     //parse the result
     json_doc.Parse(json_string.c_str());
-    entries.clear();
+    //entries.clear();
 
     //update internal state
     rapidjson::Value& curr_entry = json_doc["response"]["data"]["data"];
 
     for(short i = 0; i < 4; ++i){
-        entries.push_back({
+        entries.at(i) = {
             truncate(curr_entry[i]["friendly_name"].GetString(), 
                     PLEX_MAX_STRING_LENGTH),
             truncate(curr_entry[i]["ip_address"].GetString(), 
@@ -92,7 +92,7 @@ void plex::update(){
                     PLEX_MAX_STRING_LENGTH),
             truncate(curr_entry[i]["state"].IsNull() ? "Historical" : "Playing", 
                     PLEX_MAX_STRING_LENGTH),
-            });
+            };
 
         std::cerr << entries[i].friendly_name << "\n";
         std::cerr << entries[i].ip_address << "\n";

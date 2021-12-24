@@ -33,5 +33,4 @@ namespace dashboard::panel {
     constexpr uint8_t PLEX_BGBOX_BLUE    = 0x66;
     constexpr uint8_t PLEX_BGBOX_ALPHA   = 0x99;
 
-
 }
