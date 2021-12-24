@@ -130,9 +130,9 @@ void weather::update() {
 
 
     if(!WEATHER_METRIC){
-        temp_today = (temp_today * 1.8) + 32;
-        temp_tommorow = (temp_tommorow * 1.8) + 32;
-        temp_day_after = (temp_day_after * 1.8) + 32;
+        temp_today = (int)(temp_today * 1.8) + 32;
+        temp_tommorow = (int)(temp_tommorow * 1.8) + 32;
+        temp_day_after = (int)(temp_day_after * 1.8) + 32;
     }
 
     json_string.clear();

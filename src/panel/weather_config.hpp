@@ -16,8 +16,7 @@ namespace dashboard::panel {
     constexpr char WEATHER_TITLE[] = "Weather";
 
     //Cuyahoga Falls Weather Feed
-    //static const char* WEATHER_URL_SOURCE = "https://www.7timer.info/bin/civil.php?lon=41.13&lat=-81.48&unit=british&output=json&tzshift=0";
-    constexpr char WEATHER_URL_SOURCE[] = "https://www.7timer.info/bin/civil.php?lon=41.13&lat=-81.48&unit=british&output=json&tzshift=0";
+    constexpr char WEATHER_URL_SOURCE[] = "https://www.7timer.info/bin/civil.php?lon=-81.48&lat=41.134&unit=metric&output=json&tzshift=0";
 
     //Default time the slide is shown on screen, in ms
     //Default 15s
