@@ -109,11 +109,25 @@ void plex::update(){
 
     json_string.clear();
 
+    //make request for top users
+    curl_easy_setopt(api_curl, CURLOPT_URL, PLEX_URL_SOURCE_TOP_USERS);
+    curl_easy_perform(api_curl);
+    json_doc.Parse(json_string.c_str());
+
+    curr_entry = json_doc["response"]["data"]["categories"];
+
+    for(rapidjson::SizeType i = 0; i < curr_entry.Size(); i++){
+        top_users[i] = truncate(curr_entry[i].GetString(), PLEX_MAX_STRING_LENGTH);
+    }
+
+    json_string.clear();
+
+
     //make request for friendly server name
     curl_easy_setopt(api_curl, CURLOPT_URL, PLEX_URL_SOURCE_NAME);
     curl_easy_perform(api_curl);
-
     json_doc.Parse(json_string.c_str());
+
     friendly_name = truncate(json_doc["response"]["data"].GetString(), PLEX_MAX_STRING_LENGTH - 10);
     
     json_string.clear();
@@ -359,6 +373,26 @@ void plex::update_texture(){
                 board::getString(total_duration,
                     {"Roboto_Mono/RobotoMono-Medium.ttf", 28}),
                 NULL, &tgt);
+
+        //draw the top users
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 50} ),
+                "Top Users",
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString("Top Users",
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 50}),
+                NULL, &tgt);
+        for(unsigned short i = 0; i < top_users.size(); ++i){
+            tgt.y += tgt.h;
+            TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28} ),
+                    top_users[i].c_str(),
+                    &tgt.w, &tgt.h);
+            SDL_RenderCopy(board::getRenderer(),
+                    board::getString(top_users[i],
+                        {"Roboto_Mono/RobotoMono-Medium.ttf", 28}),
+                    NULL, &tgt);
+        }
     }
 
 

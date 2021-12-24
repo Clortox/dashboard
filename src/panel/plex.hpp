@@ -48,6 +48,7 @@ namespace dashboard::panel {
         };
 
         std::array<plex_entry, 4> entries;
+        std::array<std::string, 10> top_users;
         std::string total_plays;
         std::string total_duration;
         std::string friendly_name;
