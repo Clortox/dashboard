@@ -78,8 +78,28 @@ void plex::update(){
     //parse the result
     json_doc.Parse(json_string.c_str());
 
+    std::cerr << json_string << "\n";
+
     //update internal state
-    //const rapidjson::Value& curr_entry = json_doc["value"];
+    rapidjson::Value& curr_entry = json_doc["response"]["data"]["data"];
+
+    for(short i = 0; i < 4; ++i){
+        entries.push_back({
+            truncate(curr_entry[i]["friendly_name"].GetString(), 
+                    PLEX_MAX_STRING_LENGTH),
+            truncate(curr_entry[i]["ip_address"].GetString(), 
+                    PLEX_MAX_STRING_LENGTH),
+            truncate(curr_entry[i]["title"].GetString(), 
+                    PLEX_MAX_STRING_LENGTH),
+            truncate(curr_entry[i]["state"].IsNull() ? "Historical" : "Playing", 
+                    PLEX_MAX_STRING_LENGTH),
+            });
+
+        std::cerr << entries[i].friendly_name << "\n";
+        std::cerr << entries[i].ip_address << "\n";
+        std::cerr << entries[i].title << "\n";
+        std::cerr << entries[i].state << "\n";
+    }
     
 }
 
@@ -88,15 +108,216 @@ void plex::update(){
 // displayed, based on data in the json feed
 void plex::update_texture(){
     std::cerr << "PLEX::UPDATE_TEXTURE\n";
+    uint8_t o_red, o_green, o_blue, o_alpha;
     SDL_Rect tgt;
+
+    //save the old colors
+    SDL_GetRenderDrawColor(board::getRenderer(), &o_red,
+            &o_green, &o_blue, &o_alpha);
     
     SDL_SetRenderTarget(board::getRenderer(), _texture);
     SDL_RenderClear(board::getRenderer());
 
+    //set the new color
+    SDL_SetRenderDrawColor(board::getRenderer(),
+            PLEX_BGBOX_RED, PLEX_BGBOX_GREEN, 
+            PLEX_BGBOX_BLUE, PLEX_BGBOX_ALPHA);
 
+    //background image
+    SDL_RenderCopy(board::getRenderer(),
+            board::getImage("plex_background.jpg"), NULL, NULL);
+
+    constexpr int GAP_SIZE = 10;
+
+    //draw the outline rectangles
+    tgt.x = GAP_SIZE;
+    tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+    SDL_RenderFillRect(board::getRenderer(), &tgt);
+
+    tgt.x = GAP_SIZE;
+    tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
+    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+    SDL_RenderFillRect(board::getRenderer(), &tgt);
+
+    tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
+    tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+    SDL_RenderFillRect(board::getRenderer(), &tgt);
+
+    tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
+    tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
+    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+    tgt.h = (SCREEN_HEIGHT / 2) - DEF_OVERLAY_BAR_HEIGHT - (2*GAP_SIZE);
+    SDL_RenderFillRect(board::getRenderer(), &tgt);
+
+    tgt.x = ((2*SCREEN_WIDTH) / 3) + GAP_SIZE;
+    tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+    tgt.w = (SCREEN_WIDTH / 3) - (2*GAP_SIZE);
+    tgt.h = (SCREEN_HEIGHT) - (2*DEF_OVERLAY_BAR_HEIGHT) - (2*GAP_SIZE);
+    SDL_RenderFillRect(board::getRenderer(), &tgt);
+
+    //draw info for first box
+    {
+        tgt.x = GAP_SIZE;
+        tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+        constexpr int index = 0;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].title.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].title,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].friendly_name.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].friendly_name,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].ip_address.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].ip_address,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].state.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].state,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+    }
+
+    //draw the second box
+    {
+        tgt.x = GAP_SIZE;
+        tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
+        constexpr int index = 1;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].title.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].title,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].friendly_name.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].friendly_name,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].ip_address.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].ip_address,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].state.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].state,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+    }
+
+    //third box
+    {
+        tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
+        tgt.y = DEF_OVERLAY_BAR_HEIGHT + GAP_SIZE;
+        constexpr int index = 2;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].title.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].title,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].friendly_name.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].friendly_name,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].ip_address.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].ip_address,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].state.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].state,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+    }
+
+    //draw info for fourth box
+    {
+        tgt.x = (SCREEN_WIDTH / 3) + GAP_SIZE;
+        tgt.y = (SCREEN_HEIGHT / 2) + GAP_SIZE;
+        constexpr int index = 3;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].title.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].title,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].friendly_name.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].friendly_name,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].ip_address.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].ip_address,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+        tgt.y += tgt.h;
+        TTF_SizeText(board::getFont( {"Roboto_Mono/RobotoMono-Medium.ttf", 28 } ),
+                entries[index].state.c_str(),
+                &tgt.w, &tgt.h);
+        SDL_RenderCopy(board::getRenderer(),
+                board::getString(entries[index].state,
+                    {"Roboto_Mono/RobotoMono-Medium.ttf", 28 }),
+                NULL, &tgt);
+    }
 
 
     SDL_SetRenderTarget(board::getRenderer(), NULL);
+
+    //reset back to the old render color
+    SDL_SetRenderDrawColor(board::getRenderer(),
+            o_red, o_green, o_blue, o_alpha);
 }
 
 ///////////////////////////////////////
@@ -112,6 +333,18 @@ void plex::initTexture(){
 
         SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
     }
+}
+
+///////////////////////////////////////
+// Helper function to truncate a string with an elipsis
+std::string plex::truncate(std::string str, size_t width, bool show_ellipsis){
+    if(str.length() > width){
+        if(show_ellipsis)
+            return str.substr(0, width - 3) + "...";
+        else
+            return str.substr(0, width);
+    }
+    return str;
 }
 
 ///////////////////////////////////////

@@ -46,6 +46,9 @@ const char* IMAGE_LOCATIONS[] = {
     "shower.png",
     "snowday.png",
     "snownight.png",
+
+    //plex
+    "plex_background.jpg",
     
 };
 size_t IMAGE_LOCATIONS_LENGTH = sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0]);

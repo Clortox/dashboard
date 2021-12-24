@@ -18,6 +18,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <vector>
 
 namespace dashboard::panel {
     class plex : public panel {
@@ -33,9 +34,21 @@ namespace dashboard::panel {
         void update_texture();
         void initTexture();
 
+        std::string truncate(std::string, size_t, bool = true);
+
         CURL* api_curl;
         std::string json_string;
         rapidjson::Document json_doc;
+
+        struct plex_entry {
+            std::string friendly_name;
+            std::string ip_address;
+            std::string title;
+            std::string state;
+        };
+
+        std::vector<plex_entry> entries;
+
 
         std::chrono::time_point<std::chrono::high_resolution_clock> _last_update;
         std::chrono::milliseconds _update_interval;
