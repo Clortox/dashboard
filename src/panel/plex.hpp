@@ -39,7 +39,6 @@ namespace dashboard::panel {
         CURL* api_curl;
         std::string json_string;
         rapidjson::Document json_doc;
-
         struct plex_entry {
             std::string friendly_name;
             std::string ip_address;

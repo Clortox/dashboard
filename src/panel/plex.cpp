@@ -129,7 +129,7 @@ void plex::update(){
     json_doc.Parse(json_string.c_str());
 
     friendly_name = truncate(json_doc["response"]["data"].GetString(), PLEX_MAX_STRING_LENGTH - 10);
-    
+
     json_string.clear();
 }
 
@@ -144,13 +144,13 @@ void plex::update_texture(){
     //save the old colors
     SDL_GetRenderDrawColor(board::getRenderer(), &o_red,
             &o_green, &o_blue, &o_alpha);
-    
+
     SDL_SetRenderTarget(board::getRenderer(), _texture);
     SDL_RenderClear(board::getRenderer());
 
     //set the new color
     SDL_SetRenderDrawColor(board::getRenderer(),
-            PLEX_BGBOX_RED, PLEX_BGBOX_GREEN, 
+            PLEX_BGBOX_RED, PLEX_BGBOX_GREEN,
             PLEX_BGBOX_BLUE, PLEX_BGBOX_ALPHA);
 
     //background image
@@ -411,8 +411,8 @@ void plex::update_texture(){
 void plex::initTexture(){
     if(_texture == nullptr){
         _texture = SDL_CreateTexture(board::getRenderer(),
-                SDL_PIXELFORMAT_RGBA8888, 
-                SDL_TEXTUREACCESS_TARGET, 
+                SDL_PIXELFORMAT_RGBA8888,
+                SDL_TEXTUREACCESS_TARGET,
                 SCREEN_WIDTH, SCREEN_HEIGHT);
 
         SDL_SetTextureBlendMode(_texture, SDL_BLENDMODE_BLEND);
