@@ -9,9 +9,14 @@ Features/TODO
 
 - (DONE) Write straight to framebuffer (sdl2) 
 - (DONE) Display Weather ~~rss~~ json feed
+  - Get UV Data from openUV
 - (DONE) Display Wifi qrcode 
+  - Get wifispeed and number of clients from home assistant
 - (DONE) Display plex currently playing
 - Display camera feed
+- Integrate with Home assistant data (New panel) 
+  - https://developers.home-assistant.io/docs/api/rest/
+- Integrate with octoprint
 
 Depends on
 ==========
