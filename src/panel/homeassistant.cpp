@@ -86,8 +86,6 @@ void homeassistant::update(){
     //perform request
     curl_easy_perform(api_curl);
 
-    std::cerr << json_string << "\n";
-
     //parse the result
     json_doc.Parse(json_string.c_str());
 
@@ -213,7 +211,7 @@ std::time_t homeassistant::datestringToTm(const std::string& date_string){
         tm_tmp.tm_sec = second;
     }
 
-    return std::mktime(&tm_tmp);
+    return std::mktime(&tm_tmp) - timezone;
 }
 
 ///////////////////////////////////////
