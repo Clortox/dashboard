@@ -10,10 +10,12 @@
 // A list of all panels to be displayed, in order
 dashboard::panel::panel* PANELS[] = {
     //new dashboard::panel::sample_panel(),
+    new dashboard::panel::homeassistant(),
     new dashboard::panel::plex(),
     new dashboard::panel::weather(),
     new dashboard::panel::wifi(),
 };
+
 size_t PANELS_LENGTH = sizeof(PANELS)/sizeof(PANELS[0]);
 
 // OVERLAY
@@ -49,7 +51,8 @@ const char* IMAGE_LOCATIONS[] = {
 
     //plex
     "plex_background.jpg",
-    
+
+    //homeassistant
 };
 size_t IMAGE_LOCATIONS_LENGTH = sizeof(IMAGE_LOCATIONS)/sizeof(IMAGE_LOCATIONS[0]);
 
@@ -76,6 +79,7 @@ const FONT_SIZE_STRING CONST_STRINGS[] = {
     { "Weather", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
     { "Wireless", { "Roboto_Mono/RobotoMono-Medium.ttf", 50 } },
     { "Plex", { "Roboto_Mono/RobotoMono-Medium.ttf", 50} },
+    { "Homeassistant", { "Roboto_Mono/RobotoMono-Medium.ttf", 50} },
     //sample panel
     //{ "Sample Panel", { "Roboto_Mono/RobotoMono-Medium.ttf", 50} },
 
@@ -101,5 +105,7 @@ const FONT_SIZE_STRING CONST_STRINGS[] = {
     { "Playing", {"Roboto_Mono/RobotoMono-Medium.ttf", 28} },
     { "Top Users", {"Roboto_Mono/RobotoMono-Medium.ttf", 50} },
 
+    //Home assistant
+    { "Home", {"Roboto_Mono/RobotoMono-Medium.ttf", 50} },
 };
 size_t CONST_STRINGS_LENGTH = sizeof(CONST_STRINGS)/sizeof(CONST_STRINGS[0]);
