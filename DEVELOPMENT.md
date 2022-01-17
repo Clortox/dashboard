@@ -66,3 +66,10 @@ Things you need to implement as a panel creator
 - `const_resources`
 
 And be sure to inheret from dashboard::panel !
+
+FAQ
+===
+
+- I wrote my pannel, yet i keep seeing that SCREEN_WIDTH, SCREEN_HEIGHT,
+  board::*, etc are not defined 
+  - Be sure to add `#include "../board.hpp"` at the end of your mypanel.hpp
