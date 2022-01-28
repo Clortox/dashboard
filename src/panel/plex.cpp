@@ -50,7 +50,7 @@ void plex::draw(){
     }
 
     //check if its time to update
-    if((std::chrono::high_resolution_clock::now() - _last_update) 
+    if((std::chrono::high_resolution_clock::now() - _last_update)
             > _update_interval){
         update();
 
@@ -84,13 +84,13 @@ void plex::update(){
 
     for(short i = 0; i < 4; ++i){
         entries.at(i) = {
-            truncate(curr_entry[i]["friendly_name"].GetString(), 
+            truncate(curr_entry[i]["friendly_name"].GetString(),
                     PLEX_MAX_STRING_LENGTH),
-            truncate(curr_entry[i]["ip_address"].GetString(), 
+            truncate(curr_entry[i]["ip_address"].GetString(),
                     PLEX_MAX_STRING_LENGTH),
-            truncate(curr_entry[i]["title"].GetString(), 
+            truncate(curr_entry[i]["title"].GetString(),
                     PLEX_MAX_STRING_LENGTH),
-            truncate(curr_entry[i]["state"].IsNull() ? "Historical" : "Playing", 
+            truncate(curr_entry[i]["state"].IsNull() ? "Historical" : "Playing",
                     PLEX_MAX_STRING_LENGTH),
             };
 

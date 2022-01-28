@@ -16,7 +16,7 @@ int main(int argc, char** argv){
     dashboard::board _board(false);
 
     if(_board.init() != 0){
-        std::cerr << "Due to errors, " << argv[0] 
+        std::cerr << "Due to errors, " << argv[0]
             << " was unable to start, quitting!" << std::endl;
         return -1;
     }

@@ -62,7 +62,7 @@ void homeassistant::draw(){
     }
 
     //check if its time to update
-    if((std::chrono::high_resolution_clock::now() - _last_update) 
+    if((std::chrono::high_resolution_clock::now() - _last_update)
             > _update_interval){
         update();
 

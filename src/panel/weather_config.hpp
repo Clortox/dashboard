@@ -36,57 +36,57 @@ namespace dashboard::panel {
     //with weather string being the string shown on screen, and weather image
     //being the name of the preloaded image file to be shown. It is best that
     //these images be square.
-    const std::pair<std::string, std::string> WEATHER_CLEAR_DAY = 
+    const std::pair<std::string, std::string> WEATHER_CLEAR_DAY =
         {"Clear skies", "clearday.png"};
-    const std::pair<std::string, std::string> WEATHER_CLEAR_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_CLEAR_NIGHT =
         {"Clear skies", "clearnight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_PCLOUDY_DAY = 
+    const std::pair<std::string, std::string> WEATHER_PCLOUDY_DAY =
         {"Slightly cloudy", "cloudyday.png"};
-    const std::pair<std::string, std::string> WEATHER_PCLOUDY_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_PCLOUDY_NIGHT =
         {"Slightly cloudy", "cloudynight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_MCLOUDY_DAY = 
+    const std::pair<std::string, std::string> WEATHER_MCLOUDY_DAY =
         {"Moderately cloudy", "cloudyday.png"};
-    const std::pair<std::string, std::string> WEATHER_MCLOUDY_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_MCLOUDY_NIGHT =
         {"Moderately cloudy", "cloudynight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_CLOUDY_DAY = 
+    const std::pair<std::string, std::string> WEATHER_CLOUDY_DAY =
         {"Very cloudy", "cloudyday.png"};
-    const std::pair<std::string, std::string> WEATHER_CLOUDY_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_CLOUDY_NIGHT =
         {"Very cloudy", "cloudynight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_HUMID_DAY = 
+    const std::pair<std::string, std::string> WEATHER_HUMID_DAY =
         {"Very humid", "humidday.png"};
-    const std::pair<std::string, std::string> WEATHER_HUMID_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_HUMID_NIGHT =
         {"Very humid", "humidnight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_LRAIN_DAY = 
+    const std::pair<std::string, std::string> WEATHER_LRAIN_DAY =
         {"Light rain", "lrainday.png"};
-    const std::pair<std::string, std::string> WEATHER_LRAIN_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_LRAIN_NIGHT =
         {"Light rain", "lrainnight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_RAIN_DAY = 
+    const std::pair<std::string, std::string> WEATHER_RAIN_DAY =
         {"Rain", "rainday.png"};
-    const std::pair<std::string, std::string> WEATHER_RAIN_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_RAIN_NIGHT =
         {"Rain", "rainnight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_OSHOWER_DAY = 
+    const std::pair<std::string, std::string> WEATHER_OSHOWER_DAY =
         {"Overcast with showers", "shower.png"};
-    const std::pair<std::string, std::string> WEATHER_OSHOWER_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_OSHOWER_NIGHT =
         {"Overcast with showers", "shower.png"};
 
-    const std::pair<std::string, std::string> WEATHER_ISHOWER_DAY = 
+    const std::pair<std::string, std::string> WEATHER_ISHOWER_DAY =
         {"Moderate showers", "shower.png"};
-    const std::pair<std::string, std::string> WEATHER_ISHOWER_NIGHT = 
+    const std::pair<std::string, std::string> WEATHER_ISHOWER_NIGHT =
         {"Moderate showers", "shower.png"};
 
-    const std::pair<std::string, std::string> WEATHER_LSNOW_DAY = 
+    const std::pair<std::string, std::string> WEATHER_LSNOW_DAY =
         {"Light snow", "snowday.png"};
     const std::pair<std::string, std::string> WEATHER_LSNOW_NIGHT =
         {"Light snow", "snownight.png"};
 
-    const std::pair<std::string, std::string> WEATHER_SNOW_DAY = 
+    const std::pair<std::string, std::string> WEATHER_SNOW_DAY =
         {"Moderate snow", "snowday.png"};
     const std::pair<std::string, std::string> WEATHER_SNOW_NIGHT =
         {"Moderate snow", "snownight.png"};

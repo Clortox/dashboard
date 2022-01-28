@@ -13,7 +13,7 @@ namespace dashboard::panel {
     //string to not show anything
     constexpr char PLEX_TITLE[] = "Plex";
 
-    //Tautili endpoint 
+    //Tautili endpoint
     constexpr char PLEX_URL_SOURCE_HISTORY[] = "http://192.168.1.104:8181/api/v2?apikey=62917cc0bea04aa69cbb85141e312e84&cmd=get_history&length=5";
     constexpr char PLEX_URL_SOURCE_NAME[] = "http://192.168.1.104:8181/api/v2?apikey=62917cc0bea04aa69cbb85141e312e84&cmd=get_server_friendly_name";
     constexpr char PLEX_URL_SOURCE_TOP_USERS[] = "http://192.168.1.104:8181/api/v2?apikey=62917cc0bea04aa69cbb85141e312e84&cmd=get_plays_by_top_10_users";
@@ -34,5 +34,4 @@ namespace dashboard::panel {
     constexpr uint8_t PLEX_BGBOX_GREEN   = 0x66;
     constexpr uint8_t PLEX_BGBOX_BLUE    = 0x66;
     constexpr uint8_t PLEX_BGBOX_ALPHA   = 0x99;
-
 }
