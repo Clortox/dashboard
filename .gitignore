@@ -13,3 +13,6 @@ src/config.hpp
 
 #ignore wifi image
 img/wifi.png
+
+#ignore json in tests
+tests/*.json
