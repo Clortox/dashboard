@@ -113,14 +113,14 @@ void wifi::update() {
                     && WIFI_HOMEASSISTANT_SPEEDTEST){
                 speedtest_up = "Upload: ";
                 speedtest_up += json_doc[i]["state"].GetString();
-                speedtest_up += "MBps";
+                speedtest_up += "Mbps";
             } //speedtest down
             else if (strcmp(json_doc[i]["entity_id"].GetString(),
                         WIFI_HOMEASSISTANT_SPEEDTEST_DOWN) == 0
                     && WIFI_HOMEASSISTANT_SPEEDTEST){
                 speedtest_down = "Download: ";
                 speedtest_down += json_doc[i]["state"].GetString();
-                speedtest_down += "MBps";
+                speedtest_down += "Mbps";
             } //speedtest ping
             else if (strcmp(json_doc[i]["entity_id"].GetString(),
                         WIFI_HOMEASSISTANT_SPEEDTEST_PING) == 0
