@@ -2,20 +2,21 @@ dashboard
 =========
 
 My dashboard, for my house. Display RSS feeds and other custom bits of info via
-direct SDL2 calls. 
+direct SDL2 calls.
 
 Features/TODO
 =============
 
-- (DONE) Write straight to framebuffer (sdl2) 
+- (DONE) Write straight to framebuffer (sdl2)
 - (DONE) Display Weather ~~rss~~ json feed
   - Get UV Data from openUV
-- (DONE) Display Wifi qrcode 
+- (DONE) Display Wifi qrcode
   - Get wifispeed and number of clients from home assistant
 - (DONE) Display plex currently playing
 - Display camera feed
-- Integrate with Home assistant data (New panel) 
+- Integrate with Home assistant data (New panel)
   - https://developers.home-assistant.io/docs/api/rest/
+  - (DONE) Presence
 - Integrate with octoprint
 
 Depends on
